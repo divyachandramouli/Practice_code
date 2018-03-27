@@ -124,14 +124,19 @@ Huge spike on Jan 1 - could be because deafult DOB on FB is Jan 1, or users to p
 ***
 
 ### Be Skeptical - Outliers and Anomalies
-Notes:
+Types of anomalies/outliers can influence how you deal
+-Accurate data about extreme case - someone tweeting excessively
+-Bad data/limitations of the data, eg. normal value replaced with an extreme value - for eg, people with high incomes have their value replaced - top coded 
+
+A top-coded data set is one for which the value of variables above an upper bound are censored. This is often done to preserve the anonymity of people participating in the survey.
 
 ***
 
 ### Moira's Outlier
-Notes:
-#### Which case do you think applies to Moira’s outlier?
-Response:
+Most people guessed a small number but atleast one person gave a really huge number (10 million)  - small bar at the end  distant from the initial tall bar - adjust the axis to see the bulk of the data - cut the outlier out 
+#### Which case do you think applies to Moiras outlier?
+Bad data about an extreme case ( max friends possible is 5000 - 10 million is bad, extreme) Note that this study only asked people about posts with "Friends" privacy, not "Public" privacy settings
+Think about what case your outlier falls in - then you know whether to replace / exclude them if you want to make those decisions
 
 ***
 
