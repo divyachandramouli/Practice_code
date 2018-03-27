@@ -65,25 +65,17 @@ On the 31st, fewer number of people - makes sense because not all months have 31
 
 ### Moira's Investigation
 Notes:
-
+Mismatch between perceived audience size for a post and actual audience (counted)
+People underestimated their audience size - typically quarter of actual audience
+In ggplot, she plotted a histogram of people's guesses for perceived audience
 ***
 
-### Estimating Your Audience Size
-Notes:
-
-***
 
 #### Think about a time when you posted a specific message or shared a photo on Facebook. What was it?
-Response:
+Response: Birthday post for a friend, 250 friends saw it, 50% of friends (500)
 
-#### How many of your friends do you think saw that post?
-Response:
 
-#### Think about what percent of your friends on Facebook see any posts or comments that you make in a month. What percent do you think that is?
-Response:
-
-***
-
+### Estimating audience size
 ### Perceived Audience Size
 Notes:
 
@@ -95,7 +87,7 @@ Notes:
 
 ```
 
-#### Let’s take another look at our plot. What stands out to you here?
+#### Let us take another look at our plot. What stands out to you here?
 Response:
 
 ***
