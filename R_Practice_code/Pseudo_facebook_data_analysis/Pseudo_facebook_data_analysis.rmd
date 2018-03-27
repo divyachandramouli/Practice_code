@@ -31,17 +31,35 @@ names(pf)
 ***
 
 ### Histogram of Users' Birthdays - DOB by day - no. of users with birthdays on a certain day
-Notes:
+
 
 ```{r Histogram of Users\' Birthdays}
 install.packages('ggplot2')
 library(ggplot2)
+names(pf)
+qplot(x=dob_day,data=pf) +
+  scale_x_continuous(breaks=1:31)
+
+install.packages('ggthemes', dependencies = TRUE)
+library(ggthemes)
+
+
+  
+
+```
+```{r}
+theme_set(theme_minimal(14))
+ggplot(aes(x = dob_day), data = pf) +
+  geom_histogram(binwidth = 1) +
+  scale_x_continuous(breaks=1:31)
 ```
 
 ***
 
 #### What are some things that you notice about this histogram?
 Response:
+One the first day, huge number of people have their birthdays - unusual
+On the 31st, fewer number of people - makes sense because not all months have 31st
 
 ***
 
