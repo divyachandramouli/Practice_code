@@ -146,20 +146,50 @@ Notes:
 #### What code would you enter to create a histogram of friend counts?
 
 ```{r Friend Count}
-
+qplot(x=friend_count,data=pf)
 ```
 
 #### How is this plot similar to Moira's first plot?
-Response:
+Data is squished on the left side of the plot like Moira's
+Long-tailed data - common for user level data - most users have friend counts under 500 
+Max is 5000 - tail extends till there
+
+### Equivalent Code in ggplot for histogram of friend counts
+```{r}
+
+ggplot(aes(x = friend_count), data = pf) +
+  geom_histogram()
+```
+
 
 ***
 
 ### Limiting the Axes
-Notes:
+Add a parameter inside qplot (xlim - takes a vector start and end position of axis)
+Examine friend counts less than 1000
 
 ```{r Limiting the Axes}
-
+qplot(x=friend_count,data=pf,xlim = c(0,1000))
 ```
+### Limit axis without xlim
+
+```{r}
+qplot(x=friend_count,data=pf) +
+  scale_x_continuous(limits=c(0,1000))
+```
+
+Equivalent ggplot syntax:
+
+
+```{r}
+ggplot(aes(x = friend_count), data = pf) +
+  geom_histogram() +
+  scale_x_continuous(limits = c(0, 1000))
+```
+
+
+Similar function to limit y axis is scale_y_continuos
+ggplot allows you to build up your plot in layers
 
 ### Exploring with Bin Width
 Notes:
