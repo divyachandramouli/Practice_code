@@ -81,14 +81,45 @@ Notes:
 
 ***
 ### Faceting
-Notes:
+The prev histogram was for no of people vs day of month born
+break this into 12 histograms - one for each month
 
+Add a layer called facet_wrap - has a formula  (~ <var that data is split over=dob_month>,no of columns for graphs to display=3 )
 ```{r Faceting}
+qplot(x=dob_day,data=pf) +
+  scale_x_continuous(breaks=1:31) +
+  facet_wrap(~dob_month,ncol=3)
 
 ```
+```{r}
+
+```
+Note: The use of the scale_x_discrete() layer as shown in the video is deprecated as of ggplot2 version 2.0. You can use scale_x_continuous() instead, or use ggplot() syntax as shown below.
+
+It's best to create the plot in RStudio on your computer and examine at full screen. Faceting in ggplot2
+
+Equivalent ggplot syntax:
+
+```{r}
+ggplot(data = pf, aes(x = dob_day)) +
+  geom_histogram(binwidth = 1) +
+  scale_x_continuous(breaks = 1:31) +
+  facet_wrap(~dob_month)
+```
+
+
+### Facet_wrap
+facet_wrap(formula)
+facet_wrap(~variable)
+same type of plot for each level of the categorical variable  - in this case, dob_day plot, one for each month
+
+### facet_grid
+Similar to facet_wrap - facet_grid(formula) - useful when you are passing 2 or more variables
+facet_grid( variables to split vertically ~ variables to split horizontally)
+
 
 #### Let us take another look at our plot. What stands out to you here?
-Response:
+Huge spike on Jan 1 - could be because deafult DOB on FB is Jan 1, or users to protect privacy set up jan 1 as DOB or it's the first choice in the dropdown menu - make these considerations in the context of the data - look out for these types of anomalies
 
 ***
 
