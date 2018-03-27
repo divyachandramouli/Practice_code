@@ -2,22 +2,35 @@ Lesson 3
 ========================================================
 
 ***
+### Pseudo-Facebook User Data
+READING DATA:
 
-### What to Do First?
-Notes:
+You could also use the following code to load the Pseudo Facebook data. 
+read.delim('pseudo_facebook.tsv') 
+
+The read.delim() function defaults to the tab character as the separator between values and the period as the decimal character. Run ?read.csv or ?read.delim in the console for more details.
+
+```{r}
+getwd()
+list.files()
+pf <- read.csv('pseudo_facebook.tsv',sep='\t')
+
+```
+
+The file has 99000 rows/obs (users) and 15 variables 
 
 ***
 
-### Pseudo-Facebook User Data
-Notes:
+DISPLAY THE VARIABLES
+Goal is to understand user behavior and demographics - what they do on FB and what they use
 
 ```{r Pseudo-Facebook User Data}
-
+names(pf)
 ```
 
 ***
 
-### Histogram of Users' Birthdays
+### Histogram of Users' Birthdays - DOB by day - no. of users with birthdays on a certain day
 Notes:
 
 ```{r Histogram of Users\' Birthdays}
