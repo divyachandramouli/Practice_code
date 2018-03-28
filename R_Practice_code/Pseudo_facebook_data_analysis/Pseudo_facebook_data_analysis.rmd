@@ -575,12 +575,13 @@ qplot(x = friend_count, data = subset(pf,!is.na(gender)), binwidth = 10) +
 ```
 
 
-### Generate box plots of friend count by gender and see the difference between medians
+### Generate box plots of friend count by gender and see the difference between the distributions and medians
 y axis is friend count and x axis is categorical variable - gender
+qplot by default generates histogram, so specify boxplot
 ```{r Box Plots}
 qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'boxplot')
 ```
-Boxes cover the inter quartile range - so many outliers
+Boxes cover the middle 50% of values or the inter quartile range - so many outliers - each dot
 y axis goes from 0 to 5000 - not omitting any data
 Horizontal line - median
 Outlier - just outside 1.5 times IQR from medians
@@ -598,14 +599,16 @@ Alternate way of doing this
 qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'boxplot')+
   scale_y_continuous(limits=c(0,1000))
 ```
-Female box is just below 250 - this may or may not be accurate because we removed data points
+Female box is just below 250 - this may or may not be accurate because we removed data points from calculations
 
-Let's use the cored cartesian layer and do the same
+Let's use the coord cartesian layer and do the same
 ```{r}
+qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'boxplot')+
+  coord_cartesian(ylim=c(0,1000))
 
 ```
 
-
+Top of box moved closer to 250 for females after using the coord cartesian layer
 ***
 
 ### Box Plots, Quartiles, and Friendships
