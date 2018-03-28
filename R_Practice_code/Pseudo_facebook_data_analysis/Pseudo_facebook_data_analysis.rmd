@@ -691,7 +691,16 @@ think about the kind of transformations that will help / what kind of data you n
 ***
 ### Analyzing One Variable
 Reflection:
-
+Key ideas:
+- Take a close look at individual variables in the dataset
+- Understand the types of values they take on, what their distributions look like
+- Whether there are missing values or outliers
+- Histograms, box plots, frequency polygons - important visualizations
+- Adjustments : 
+  Changed limits on some axes
+  Adjusted bin width on histogram
+  Transformed variables logrithmically or turned them into binaries to uncover hidden patterns in   the data
+  
 ***
 
 Click **KnitHTML** to see all of your hard work and to have an html
