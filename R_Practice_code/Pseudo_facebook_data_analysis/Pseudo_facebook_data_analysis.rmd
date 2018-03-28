@@ -601,7 +601,7 @@ qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'b
 ```
 Female box is just below 250 - this may or may not be accurate because we removed data points from calculations
 
-Let's use the coord cartesian layer and do the same
+Let's use the coord cartesian layer and set the y limits
 ```{r}
 qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'boxplot')+
   coord_cartesian(ylim=c(0,1000))
@@ -609,24 +609,52 @@ qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'b
 ```
 
 Top of box moved closer to 250 for females after using the coord cartesian layer
+It looks like median for females is greater than males 
+Let's take a closer look at 0 to 250 since bulk of the data seems to be here -not right choice- just reasonable
+
+```{r}
+qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'boxplot')+
+  coord_cartesian(ylim=c(0,250))
+```
+### Box Plots, Quartiles, and Friendships
+Let's get statistics and compare with the box plot
+
+```{r}
+by(pf$friend_count,pf$gender,summary)
+```
+75% of females have friend counts below 244
+25% of females have more than 244 friends
+With coord cartesian, table output of quartiles matches box plots
 ***
 
-### Box Plots, Quartiles, and Friendships
-Notes:
+#### On average, who initiated more friendships in our sample: men or women?
+
 
 ```{r Box Plots, Quartiles, and Friendships}
+names(pf)
+```
+'friendships_initiated' is the variable to use
+```{r}
+qplot(x=gender, y=friendships_initiated,data=subset(pf,!is.na(gender)),geom='boxplot') +
+  coord_cartesian(ylim=c(0,150))
 
 ```
 
-#### On average, who initiated more friendships in our sample: men or women?
-Response:
 #### Write about some ways that you can verify your answer.
-Response:
+```{r}
+by(pf$friendships_initiated, pf$gender, summary)
+```
+The interquartile range or IQR includes all of the values between the bottom and top of the boxes in the boxplot. 
+The median for females is 49 and males is 42
+## Why do we need the box plot then ??
+Box plots are helpful to understand the distribution of data and a sense of outliers - much more rich with data than just the statistics table
+
+
+
 ```{r Friend Requests by Gender}
 
 ```
 
-Response:
 
 ***
 
