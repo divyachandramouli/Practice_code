@@ -192,12 +192,31 @@ Similar function to limit y axis is scale_y_continuos
 ggplot allows you to build up your plot in layers
 
 ### Exploring with Bin Width
-Notes:
+When you adjust the bin width, you see dramatic changes, bin width to 1, taaaalll vertical lines for each number - 10,20,50,100 - don't tend to guess numbers in between 
+In most cases, it was quarter the size of the actual audience
 
 ***
 
 ### Adjusting the Bin Width
-Notes:
+Bin width is the width of each bar 
+The prev histogram we created is skewed, let's adjust bin width for it - pass a binwidth parameter to qplot and break up the x axis every 50 units - pass breaks 
+parameter = sequence( start , end, interval step)
+```{r}
+qplot(x=friend_count, data=pf, binwidth=25) +
+  scale_x_continuous(limits=c(0,1000), breaks=seq(0,1000,50))
+```
+Taking a closer look, easy to see that many users have less than 25 friends - probably new users
+
+Equivalent ggplot syntax:
+```{r}
+ggplot(aes(x = friend_count), data = pf) +
+  geom_histogram(binwidth = 25) +
+  scale_x_continuous(limits = c(0, 1000), breaks = seq(0, 1000, 50))
+```
+
+
+### Which gender group on average has more friends?
+To answer this we need to split the above histogram into 2 plots - males and females
 
 ### Faceting Friend Count
 ```{r Faceting Friend Count}
