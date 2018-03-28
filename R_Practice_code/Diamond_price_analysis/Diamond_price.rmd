@@ -1,1 +1,87 @@
-dc
+LOAD THE DATASET
+```{r}
+library(ggplot2) #must load the ggplot package first
+data(diamonds) #loads the diamonds data set since it comes with the ggplot package
+summary(diamonds)
+```
+
+
+## No of observations = 53940
+## No of variables = 10
+## No of ordered factors = 3
+
+```{r}
+# Get details on the dataset
+?diamonds
+```
+
+## Letter representing the best color for a diamond : D
+
+### Create a histogram of the price of all the diamonds in the diamond dataset
+```{r}
+qplot(x=price,data=diamonds)
+```
+The distribution is long tailed
+```{r}
+summary(diamonds$price)
+```
+## How many diamonds cost less than $500?
+
+```{r}
+sum (diamonds$price < 500)
+```
+
+## How many diamondscost less than $250?
+```{r}
+sum (diamonds$price < 250)
+```
+## How many diamonds cost $15000 or more?
+
+```{r}
+sum (diamonds$price >= 15000)
+```
+
+# Explore the largest peak in the
+# price histogram you created earlier.
+
+# Try limiting the x-axis, altering the bin width,
+# and setting different breaks on the x-axis.
+
+# There won't be a solution video for this
+# question so go to the discussions to
+# share your thoughts and discover
+# what other people find.
+
+# You can save images by using the ggsave() command.
+# ggsave() will save the last plot created.
+# For example...
+#                  qplot(x = price, data = diamonds)
+#                  ggsave('priceHistogram.png')
+
+# ggsave currently recognises the extensions eps/ps, tex (pictex),
+# pdf, jpeg, tiff, png, bmp, svg and wmf (windows only).
+
+# Submit your final code when you are ready.
+
+
+```{r}
+qplot(x=price, data=diamonds, binwidth=1) +
+  scale_x_continuous(limits=c(250,2000),breaks=seq(250,2000,250))
+  
+```
+No diamonds cost around $1500 - gap in the histogram
+
+Limiting the axes to explore the peak
+
+```{r}
+qplot(x=price, data=diamonds, binwidth=1) +
+  scale_x_continuous(limits=c(250,700),breaks=seq(250,700,25))
+```
+
+```{r}
+qplot(x=price, data=diamonds, binwidth=1) +
+  scale_x_continuous(limits=c(600,700),breaks=seq(600,700,5))
+```
+
+The mode is at $605 (binwidth =1) - most diamonds have this price - largest peak in the histogram
+
