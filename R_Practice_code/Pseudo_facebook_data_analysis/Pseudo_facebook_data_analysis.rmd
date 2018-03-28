@@ -269,24 +269,43 @@ qplot(x = friend_count, data = na.omit(pf), binwidth = 10) +
                      breaks = seq(0, 1000, 50)) +
   facet_wrap(~gender,ncol=2)
 ```
+Equivalent ggplot syntax:
+
+```{r}
+ggplot(aes(x = friend_count), data = subset(pf, !is.na(gender))) +
+  geom_histogram() +
+  scale_x_continuous(limits = c(0, 1000), breaks = seq(0, 1000, 50)) +
+  facet_wrap(~gender)
+```
 
 ***
 
 ### Statistics 'by' Gender
-Notes:
 
+Instead of histogram let's use table
 ```{r Statistics \'by\' Gender}
+table(pf$gender)
+```
+It looks like slightly more males than females in the sample
+Average friend count by gender
 
+by(variable, a categorical var or a list of indices to subset over, a function)
+
+In our case friend count is the variable, gender is the categorical var, and summary is the function to get basic statistics
+
+```{r}
+by(pf$friend_count,pf$gender,summary)
 ```
 
 #### Who on average has more friends: men or women?
-Response:
+Women
 
 #### What's the difference between the median friend count for women and men?
-Response:
+22
 
 #### Why would the median be a better measure than the mean?
-Response:
+
+Mean friend count is higher than median for males and females - this makes sense since our data is long tailed - values in the higher friend counts will pull the mean to the right (few people will higher friend count drag the mean right) - mean is not representative of most users,  median is a more robust statistic, resistant to change since it marks the halfway point for the data points - since we can trust half our values we can report a reliable location of the center of our distribution
 
 ***
 
