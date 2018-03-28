@@ -649,26 +649,46 @@ The median for females is 49 and males is 42
 ## Why do we need the box plot then ??
 Box plots are helpful to understand the distribution of data and a sense of outliers - much more rich with data than just the statistics table
 
-
-
-```{r Friend Requests by Gender}
-
-```
-
-
 ***
 
 ### Getting Logical
-Notes:
+Other ways to transform variables - convert variables to true/false 
+Eg, whether a person used a feature or not instead of how many time he used the feature : 0 is false and any no is true
 
-```{r Getting Logical}
 
+```{r }
+summary(pf$mobile_likes)
 ```
 
-Response:
 
+```{r Getting Logical}
+summary(pf$mobile_likes > 0)
+```
+Instead of tracking mobile likes let's track mobile check-ins
+Create a variable and assign NA values
+Assignmobile_check in  1 if there is a number in mobile_likes, else 0
+Convert it to a factor variable
+gets the new var saved
+get summary
+
+```{r}
+pf$mobile_check_in <- NA # Creates a new variable in the dataframe with NA values
+pf$mobile_check_in <- ifelse(pf$mobile_likes > 0,1,0)
+pf$mobile_check_in <- factor (pf$mobile_check_in)
+summary(pf$mobile_check_in)
+```
+About 64000 have checked in using mobile while 35000 have not
+sum() will not work directly on afactor variable - generate a boolean and then sum
+OR we should have mobile_check_in as boolean instead of factor
+
+### What percent of users checked in using mobile?
+```{r}
+sum(pf$mobile_check_in == '1')/length(pf$mobile_check_in)
+```
+64.6 % users checked in using mobile 
+that's more than half the users - so it would make sense to continue the development of the mobile experience , atleast based on this sample data set
+think about the kind of transformations that will help / what kind of data you need 
 ***
-
 ### Analyzing One Variable
 Reflection:
 
