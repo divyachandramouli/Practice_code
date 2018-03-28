@@ -309,19 +309,36 @@ Mean friend count is higher than median for males and females - this makes sense
 
 ***
 
-### Tenure
-Notes:
+### Tenure / How many days someone has been using facebook
+Use color to jazz up the plot.The parameter color determines the color outline of objects in a plot.
+
+The parameter fill determines the color of the area inside objects in a plot.
+
+You might notice how the color black and the hex code color of #099DD9 (a shade of blue) are wrapped inside of I(). The I() functions stand for 'as is' and tells qplot to use them as colors.
 
 ```{r Tenure}
+library(ggplot2)
 
+qplot( x = tenure, data = pf, binwidth =30, color = I('black'), fill = I('#099DD9'))
+```
+Equivalent ggplot syntax for plots:
+
+```{r}
+ggplot(aes(x = tenure), data = pf) +
+  geom_histogram(binwidth = 30, color = 'black', fill = '#099DD9')
+
+ggplot(aes(x = tenure/365), data = pf) +
+  geom_histogram(binwidth = .25, color = 'black', fill = '#F79420')
 ```
 
 ***
 
 #### How would you create a histogram of tenure by year?
+Limit to 7 years, change color, change bin width, change x axis to increment by 1 year
 
 ```{r Tenure Histogram by Year}
-
+qplot( x = tenure/365, data = pf, binwidth =0.25, color = I('black'), fill = I('#F79420')) +
+  scale_x_continuous(breaks=seq(1,7,1),limits=c(0,7))
 ```
 
 ***
