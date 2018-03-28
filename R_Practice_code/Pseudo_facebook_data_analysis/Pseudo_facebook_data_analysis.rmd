@@ -388,17 +388,72 @@ Unusual spikes above 100 - exaggerating age
 ***
 
 ### The Spread of Memes
-Notes:
 
 ***
 
 ### Lada's Money Bag Meme
 Notes:
-
+Tend to recur - one particular meme studied recurrence
+rescaling y axis to log- no. of status updates (y axis) vs Time (month,yr) in x axis
 ***
 
 ### Transforming Data
-Notes:
+Most variables like friend counts,etcare engagement variables - have long tails with values 10 or 100 times the median value
+Some users have order of magnitude different from other users (likes, friends,clicks,etc) - data is over-dispersed
+"Over-dispersed" is always relative to some particular posited distribution. For example, data might be over-dispersed compared with a Poisson distribution with that mean.
+For eg, friend count
+```{r}
+qplot(x=friend_count, data=pf)
+```
+The data here has a long tail  - transform the variable by taking a log - natural log, log base 10, or log base 2, or sqrt - helps see patterns clearly without being distracted by the tail
+Many statistical techniques like linear regression are based on the assumption that variables have normal distributions - by taking log - data is transformed into normal or close to normal distribution
+
+```{r}
+summary(pf$friend_count)
+
+```
+```{r}
+summary(log10(pf$friend_count))
+```
+negative infinity for min and mean - ??
+When friend count is zero, log is undefined - limit is neg infinity
+Add 1 to friend count so you don't get neg infinity
+```{r}
+summary(log10(pf$friend_count+1))
+```
+Much better, let's also try the sqrt
+```{r}
+summary(sqrt(pf$friend_count))
+```
+log 10 is an easier transformation to wrap our heads around - just comparing friend counts on orders of magnitude of 10, basically a ten fold scale like the pH scale
+
+### Create 3 histograms - original friend count, transformed using log 10 and transformed using sqrt - on the same plot window
+create multiple plots in a window
+```{r}
+install.packages("gridExtra")
+library(gridExtra)
+```
+
+```{r}
+
+p1=qplot(x=friend_count, data=pf)
+p2=qplot(x=log10(friend_count+1),data=pf)
+p3=qplot(x=sqrt(friend_count),data = pf)
+grid.arrange(p1,p2,p3,ncol=1)
+```
+Second log10 looks normal-ish - much better than other two 
+Third - better than not having any transform - not that long a tail
+
+### Alternate solution - ggplot - use scale 
+aes -aesthetic wrapper
+```{r}
+p1 <- ggplot(aes(x=friend_count),data=pf)+geom_histogram()
+p2 <- p1 + scale_x_log10()
+p3 <- p1 + scale_x_sqrt()
+grid.arrange(p1,p2,p3,ncol =1)
+```
+Figure out the difference in the x axis labeling
+
 
 ***
 
@@ -406,42 +461,150 @@ Notes:
 Notes:
 
 ```{r Add a Scaling Layer}
-
+logScale <- qplot(x=log10(friend_count),data=pf)
+countScale <- ggplot(aes(x=friend_count),data=pf)+geom_histogram()+ scale_x_log10()
+grid.arrange(logScale, countScale, ncol =2)
 ```
+Difference in x axis labeling - using a wrapper gets a log label
+Remember the syntax
 
 ***
-
-
 ### Frequency Polygons
+Similar to histogram but draw a curve connecting the counts in a histogram - gives shape and distribution in more detail
+Note that the shape of the frequency polygon depends on how our bins are set up - the height of the lines are the same as the bars in individual histograms, but the lines are easier to make a comparison with since they are on the same axis.
+
+Going back to friend count histogram with facet wrap by gender
 
 ```{r Frequency Polygons}
-
+qplot(x = friend_count, data = subset(pf,!is.na(gender)), binwidth = 10) +
+  scale_x_continuous(limits = c(0, 1000),
+                     breaks = seq(0, 1000, 50)) +
+  facet_wrap(~gender,ncol=2)
+```
+### Create a frequency polygon and overlay these histograms together
+```{r}
+qplot(x = friend_count, data = subset(pf,!is.na(gender)), binwidth = 10,geom='freqpoly', color = gender) +
+  scale_x_continuous(limits = c(0, 1000),
+                     breaks = seq(0, 1000, 50)) 
 ```
 
-***
 
-### Likes on the Web
+### Change y axis to show proprtions instead of counts
+```{r}
+qplot(x = friend_count, y= ..count../sum(..count..),data = subset(pf,!is.na(gender)), binwidth = 10,geom='freqpoly', color = gender) +
+  scale_x_continuous(limits = c(0, 1000),
+                     breaks = seq(0, 1000, 50)) +
+  xlab('Friend Count') +
+  ylab('Proportion of users with that friend count')
+```
+
+
+Equivalent ggplot syntax:
+
+```{r}
+ggplot(aes(x = friend_count, y = ..count../sum(..count..)),
+       data = subset(pf, !is.na(gender))) +
+  geom_freqpoly(aes(color = gender), binwidth=10) +
+  scale_x_continuous(limits = c(0, 1000), breaks = seq(0, 1000, 50)) +
+  xlab('Friend Count') +
+  ylab('Proportion of users with that friend count')
+```
+Note that sum(..count..) will sum across color, so the proportions displayed are based on total users. To plot these proportions within each group, you can try y = ..density...
+
+Equivalent ggplot syntax for solution video:
+
+```{r}
+ggplot(aes(x = www_likes), data = subset(pf, !is.na(gender))) +
+  geom_freqpoly(aes(color = gender)) +
+  scale_x_log10()
+```
+
+
+
+***
+### Use freq polygon to determine which gender makes more likes on the world wide web
+
+Check summary for www_likes
+```{r}
+summary(pf$www_likes)
+```
+
+
+```{r}
+qplot(x = www_likes,data = subset(pf,!is.na(gender)),geom='freqpoly', color = gender) +
+  scale_x_continuous()
+  
+```
+Looks like males typically have more likes count - can't make sense of the tail
+
+
+### Use a log transformation
 Notes:
 
 ```{r Likes on the Web}
-
+qplot(x = www_likes, data = subset(pf,!is.na(gender)),geom='freqpoly', color = gender)+
+  scale_x_continuous() +
+    scale_x_log10()
 ```
+Females overtake males at one point in the graph - still wondering who has more www_likes
 
+### Likes on the web quiz
+
+
+```{r}
+by(pf$www_likes,pf$gender,summary)
+```
+### What is the www_likes count for males?
+### Which gender has more www_likes?
+
+```{r}
+by(pf$www_likes,pf$gender,sum)
+```
+Females have more www_likes -more than two times the number of likes as men - can help  a business or a website to decide on features or investments
 
 ***
 
 ### Box Plots
 Notes:
-
-```{r Box Plots}
-
+### Histograms
+```{r}
+qplot(x = friend_count, data = subset(pf,!is.na(gender)), binwidth = 10) +
+  scale_x_continuous(limits = c(0, 1000),
+                     breaks = seq(0, 1000, 50)) +
+  facet_wrap(~gender,ncol=2)
 ```
 
-#### Adjust the code to focus on users who have friend counts between 0 and 1000.
 
+### Generate box plots of friend count by gender and see the difference between medians
+y axis is friend count and x axis is categorical variable - gender
+```{r Box Plots}
+qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'boxplot')
+```
+Boxes cover the inter quartile range - so many outliers
+y axis goes from 0 to 5000 - not omitting any data
+Horizontal line - median
+Outlier - just outside 1.5 times IQR from medians
+
+#### Adjust the code to focus on users who have friend counts between 0 and 1000.
+using the ylim parameter we are removing datapoints from our plot
+
+```{r}
+qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'boxplot',ylim = c(0,1000))
+```
+
+Alternate way of doing this
+
+```{r}
+qplot( x = gender, y = friend_count, data = subset(pf,!is.na(gender)), geom = 'boxplot')+
+  scale_y_continuous(limits=c(0,1000))
+```
+Female box is just below 250 - this may or may not be accurate because we removed data points
+
+Let's use the cored cartesian layer and do the same
 ```{r}
 
 ```
+
 
 ***
 
