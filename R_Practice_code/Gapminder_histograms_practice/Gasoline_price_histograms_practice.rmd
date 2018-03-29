@@ -1,0 +1,48 @@
+GAPMINDER DATA - Gasoline prices in different countries over the years
+Install package
+
+```{r}
+install.packages('openxlsx')
+install.packages('ggplot2')
+```
+
+```{r}
+library(openxlsx)
+library(ggplot2)
+getwd()
+```
+```{r}
+df <- read.xlsx("Gasoline_price.xlsx")
+names(df)
+
+```
+The dataset has price of gasoline in different countries over the years
+
+```{r}
+summary(df)
+```
+
+
+```{r}
+
+qplot(x=`1991`,data=df)+
+  scale_x_continuous(limits=c(0,2),breaks=seq(0,2,0.1))
+
+```
+```{r}
+qplot(x=`1993`,data=df)+
+  scale_x_continuous(limits=c(0,2),breaks=seq(0,2,0.1))
+```
+```{r}
+qplot(x=`1995`,data=df)+
+  scale_x_continuous(limits=c(0,1.5),breaks=seq(0,2,0.1))
+```
+```{r}
+qplot(x=`2006`,data=df)+
+  scale_x_continuous(limits=c(0,2.5),breaks=seq(0,2.5,0.1))
+```
+
+
+The max and median price of gasoline has increased with the years, it was about $1.33 in the 90's and has increased to $1.9 in 2006. 
+
+The histograms show the most common gasoline price for each year across the world using available data
