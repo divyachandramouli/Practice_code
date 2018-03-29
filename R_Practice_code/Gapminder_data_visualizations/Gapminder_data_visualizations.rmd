@@ -1,0 +1,21 @@
+GAPMINDER DATA - NUMBER OF BILLIONAIRES 
+Install package
+```{r}
+install.packages('openxlsx')
+library(openxlsx)
+library(dplyr)
+
+```
+
+```
+```{r}
+getwd()
+setwd('C:/Users/cdivy/Desktop/UPLOADED/DAND/Practice_code/R_Practice_code/Gapminder_data_visualizations')
+df <- read.xlsx("billionaires.xlsx")
+```
+
+
+```{r}
+names(df)
+```
+
