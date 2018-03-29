@@ -1,0 +1,48 @@
+LOAD DATA
+```{r}
+getwd()
+```
+```{r}
+bdf <- read.csv('birthdaysExample.csv')
+names(bdf)
+```
+## Extract date, month and year from the birthdays
+```{r}
+library (ggplot2)
+#dates_formatted <- as.Date(bdf$dates,format="%m/%d/%y")
+#dates_formatted
+
+parsed_dates=strptime(bdf$dates,format="%m/%d/%y")
+bdf$date <- strftime(parsed_dates, "%d")
+bdf$month <- strftime(parsed_dates, "%m")
+bdf$year <- strftime(parsed_dates, "%y")
+
+```
+
+## Histogram of birth date 
+
+```{r}
+qplot(x=date, data=bdf)
+
+```
+Most common date seems to be the 14th, and 31st has the least number of people born on the date 
+
+## Histogram of birth month
+
+```{r}
+qplot(x=month, data=bdf)
+```
+Most common birth month is March, while the least common seems to be December
+
+## Histogram of birth year
+
+```{r}
+table(bdf$year)
+
+```
+```{r}
+qplot(x=year, data=bdf)
+```
+
+It's interesting to observe that every person in this dataset was born in the year 2014
+Therefore, in the year 2014, March has been the most common birth month and 14th has been the most common birthdate - which is the pi day!!
