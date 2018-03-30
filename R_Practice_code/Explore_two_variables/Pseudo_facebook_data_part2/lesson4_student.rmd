@@ -156,18 +156,44 @@ Some people have 50  friends while some have 1000 - so percentage makes more sen
 
 
 ### Conditional Means
-Notes:
+
+### find mean friend count by age
 
 ```{r Conditional Means}
+install.packages('dplyr')
+library(dplyr)
+# group by age and compute statistics
 
+age_groups <- group_by(pf,age)
+pf.fc_by_age <- summarise(age_groups,
+          friend_count_mean = mean(friend_count),
+          friend_count_median = median(friend_count),
+          n=n())
+
+pf.fc_by_age <- arrange(pf.fc_by_age, age) #To sort the dataframe
+head(pf.fc_by_age)
 ```
 
-Create your plot!
+## Easier way to get the above table using %>% - chain command to do a chain of operations instead of storing intermediates in variables and passing them
+
+```{r}
+pf.fc_by_age <- pf %>%
+  group_by(age) %>%
+  summarise(friend_count_mean = mean(friend_count),
+          friend_count_median = median(friend_count),
+          n=n()) %>%
+  arrange(age)
+head(pf.fc_by_age,20)
+```
+
+## Create your plot of avg friend count vs age
 
 ```{r Conditional Means Plot}
-
+ggplot(aes(x=age, y=friend_count_mean),data=pf.fc_by_age) + geom_line()
 ```
-
+At higher ages, the friend count means are highly variable - all over the place
+oddity at 69 - peak
+For young users , they have high friend count means and between 30-60 friend counts hover just about a 100
 ***
 
 ### Overlaying Summaries with Raw Data
