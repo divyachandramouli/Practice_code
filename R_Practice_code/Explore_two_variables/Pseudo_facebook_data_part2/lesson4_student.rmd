@@ -197,116 +197,239 @@ For young users , they have high friend count means and between 30-60 friend cou
 ***
 
 ### Overlaying Summaries with Raw Data
-Notes:
+Quick exploration to display summaries over raw data
+
+
+The original scatter plot of raw data is below:
 
 ```{r Overlaying Summaries with Raw Data}
+ggplot(aes(x=age, y=friend_count), data=pf) + geom_point(alpha = 1/20, position=position_jitter(h=0), color ='orange') + xlim(13,90) + coord_trans(y='sqrt')
+```
+We want to overlay the summary graph over the raw data plot, so we changed the color
+Add a geom line layer
+fun.y takes any type of function that can be applied to the y values
 
+```{r}
+ggplot(aes(x=age, y=friend_count), data=pf) + geom_point(alpha = 1/20, position=position_jitter(h=0), color ='orange') + xlim(13,90) + coord_trans(y='sqrt')+
+  geom_line(stat='summary', fun.y = mean)
+```
+Immediately reveals the increase in friend count for very young users and subsequent decrease
+Can't see how dispersed the data is around the mean
+Overlay another layer - quantiles 10 and 90% for better understanding of the data
+
+```{r}
+ggplot(aes(x=age, y=friend_count), data=pf) + geom_point(alpha = 1/20, position=position_jitter(h=0), color ='orange') + xlim(13, 90) + coord_trans(y='sqrt')+
+  geom_line(stat='summary', fun.y = mean) +
+  geom_line(stat='summary', fun.y = quantile, fun.args = list(probs= 0.1),linetype=2, color ='blue') + geom_line(stat='summary', fun.y = quantile, fun.args = list(probs= 0.9),linetype=2, color ='blue') + geom_line(stat='summary', fun.y = quantile, fun.args = list(probs= 0.5),color ='blue')
+```
+### Insights
+Having more than 1000 friends is rare even for young people - 90% of users have less than 1000
+
+
+To zoom in the code should use thecoord_cartesian(xlim = c(13, 90)) layer rather than xlim(13, 90) layer. Remove coord_trans 
+Let's look at users between 13 and 70, and since most users have less than 1000, we'll limit y as well
+
+```{r}
+ggplot(aes(x=age, y=friend_count), data=pf) + geom_point(alpha = 1/20, position=position_jitter(h=0), color ='orange') + coord_cartesian(xlim = c(13, 70), ylim=c(0,1000)) + 
+  geom_line(stat='summary', fun.y = mean) +
+  geom_line(stat='summary', fun.y = quantile, fun.args = list(probs= 0.1),linetype=2, color ='blue') + geom_line(stat='summary', fun.y = quantile, fun.args = list(probs= 0.9),linetype=2, color ='blue') + geom_line(stat='summary', fun.y = quantile, fun.args = list(probs= 0.5),color ='blue')
+  
 ```
 
 #### What are some of your observations of the plot?
-Response:
+For 35 - 60 year olds the friend count falls below 250
 
 ***
 
 ### Moira: Histogram Summary and Scatterplot
-See the Instructor Notes of this video to download Moira's paper on perceived audience size and to see the final plot.
+Aligning the histogram summary and scatterplot
+
+Actual % of friends - perceived 5 of friend = by how much the audience underestimated the size
+
+A histogram of this data shows how many people fell in each percent of underestimation 
+0% means exactly estimated
+negative percent - over estimation
+Positive percent : Underestimation
 
 Notes:
 
 ***
 
 ### Correlation
-Notes:
+try to summarize the strength of relationship between age and friend count using a correlation coefficient
+Use the Pearson product moment correlation (r) to measure the linear relationship
 
 ```{r Correlation}
-
+?cor.test
 ```
 
 Look up the documentation for the cor.test function.
 
 What's the correlation between age and friend count? Round to three decimal places.
-Response:
 
-***
-
-### Correlation on Subsets
-Notes:
-
-```{r Correlation on Subsets}
-with(                 , cor.test(age, friend_count))
+```{r}
+cor.test(pf$age, pf$friend_count, method= "pearson")
 ```
 
+Response:
+We get a corr coeff of -.0274 - indicates no meaningful relationship between the two 
+A good rule of thumb is that a coeff
+> 0.3 or <-0.3 is meaningful but small
+around 0.5 is moderate
+>0.7 is large
+
+the relationship is not linear - not monotonic either inc or dec
+
+
+Another way to do this
+
+with allows us to run the R function in an environment constructed from the data
+
+```{r}
+with(pf, cor.test(age,friend_count, method = 'pearson'))
+```
+
+### Correlation on Subsets
+We know that the relationship is not meaningful, not monotonic
+Maybe we don't want to include the older ages in the plot - likely to be incorrect
+users ostensibly of age 70 or less (apparently or purportedly, but maybe not actually)
+
+```{r Correlation on Subsets}
+with(subset(pf, pf$age<=70), cor.test(age, friend_count))
+```
+A different story - indicates a negative relationship
+Friend count decreases as age increases
+But one variable doesn't cause the other - growing old doesn't mean they'll have fewer internet friends
+Use inferential statistics on data from experimental research rather than descriptive statistics to address causality
 ***
 
 ### Correlation Methods
-Notes:
+Measures of monotonic relationships:
+Rank correlation - like spearman 
 
+```{r}
+with(subset(pf, age<=70), cor.test(age, friend_count, method = 'spearman'))
+```
+here we have a different test statistic called rho , it has a different value
+
+http://www.statisticssolutions.com/correlation-pearson-kendall-spearman/
+
+Single number coefficients are useful but not great substitutes to studying scatter plots and computing conditional summaries - richer understanding from plots
 ***
 
 ## Create Scatterplots
-Notes:
+Look at number of likes received from desktop version of the sites and compare it with the total number of likes received
 
 ```{r}
-
+ggplot( aes (www_likes_received, likes_received), data=pf)+geom_point()
 ```
 
 ***
 
 ### Strong Correlations
-Notes:
+the plot has funky outliers and bulk of data is at the bottom
+To determine good axis limits let's look at 95th percentile
+
+
 
 ```{r Strong Correlations}
+ggplot( aes (www_likes_received, likes_received), data=pf)+geom_point()+
+  xlim(0,quantile(pf$www_likes_received,0.95)) +
+  ylim(0,quantile(pf$likes_received,0.95))
+```
+this in effect zooms in on the lower portion of the graph 
+Get a line of best fit through these points - slope of this line is the correlation
+Add a geom_smooth layer, set the method to a linear model
 
+```{r}
+ggplot( aes (www_likes_received, likes_received), data=pf)+geom_point()+
+  xlim(0,quantile(pf$www_likes_received,0.95)) +
+  ylim(0,quantile(pf$likes_received,0.95))+
+  geom_smooth (method= 'lm', color= 'red')
 ```
 
-What's the correlation betwen the two variables? Include the top 5% of values for the variable in the calculation and round to 3 decimal places.
+
+
+###What's the correlation betwen the two variables? Include the top 5% of values for the variable in the calculation and round to 3 decimal places.
 
 ```{r Correlation Calcuation}
-
+cor.test(pf$www_likes_received, pf$likes_received)
 ```
+Using the whole data, without ignoring outliers
+This gives a strong positive correlation - as the number of desktop likes increases, total likes increase -  In reality most variables are not correlated that closely
+The correlation we found is an artifact of the nature of our variables - one of them is a superset of the other
 
-Response:
+The correlation coefficient is invariant under a linear transformation of either X or Y, and the slope of the regression line when both X and Y have been transformed to z-scores is the correlation coefficient.
 
-***
+It's important to note that we may not always be interested in the bulk of the data. Sometimes, the outliers ARE of interest, and it's important that we understand their values and why they appear in the data set.
 
 ### Moira on Correlation
-Notes:
+Strong correlations are not always a good thing
+How many status updates posted correlated with number of times they logged in or how many friends or how many photos
+They all measure engagement - all related 
+One of the assumptions of regression - the variables are independent of each other - it'll be difficult to tell which ones are actually driving the phenomenon
+Important to measure correlation - you'll know which ones you shouldn't throw in together and which ones to keep
+https://en.wikipedia.org/wiki/Linear_regression#Assumptions
 
 ***
 
 ### More Caution with Correlation
-Notes:
+Correlation coefficients can be deceptive - plotting the data is the best way to understand key insights
+
 
 ```{r More Caution With Correlation}
-install.packages('alr3')
+#install.packages('alr3')
 library(alr3)
+data(Mitchell)
+?Mitchell
+names(Mitchell)
 ```
+We'll see how correlation can be deceptive
 
-Create your plot!
+###Create your plot!
 
 ```{r Temp vs Month}
-
+ggplot( aes(Month,Temp), data=Mitchell)+geom_point()
 ```
+
+Argument matching (when not providing them by name) in R is a bit complex.
+
+First, arguments (or parameters) can be matched by name. If a parameter matches exactly, it is "removed" from the argument list and the remaining unnamed arguments are matched in the order that they are listed in the function definition.
+
+R does the following to match arguments... 
+
+checks for exact match of named argument
+checks for a partial match of the argument
+checks for a positional match
+If R does not find a match for a parameter, it typically throws an "unused" parameter error.
+
+Type str(functionName) to find the order of the parameters and learn more about the parameters of an R function. 
 
 ***
 
 ### Noisy Scatterplots
 a. Take a guess for the correlation coefficient for the scatterplot.
+0, looks like no correlation
 
 b. What is the actual correlation of the two variables?
 (Round to the thousandths place)
 
 ```{r Noisy Scatterplots}
-
+cor.test(Mitchell$Month,Mitchell$Temp)
 ```
-
+The actual value looks like a large correlation in the data
 ***
 
 ### Making Sense of Data
-Notes:
+###Write code to make the x axis more sensible - months - to break up the x axis every 12 months - what layer would you add?
+
+```{r}
+range(Mitchell$Month)
+```
+
 
 ```{r Making Sense of Data}
-
+ggplot( aes(Month,Temp), data=Mitchell)+geom_point()+scale_x_continuous(breaks=seq(0,203,12))
 ```
 
 ***
