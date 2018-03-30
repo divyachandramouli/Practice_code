@@ -29,12 +29,9 @@ cor.test(diamonds$x,diamonds$price)
 ```{r}
 cor.test(diamonds$y,diamonds$price)
 ```
-
-###  Correlation between price and z
+### Correlation between price and z
 
 ```{r}
 cor.test(diamonds$z,diamonds$price)
-
-
-
+```
 
