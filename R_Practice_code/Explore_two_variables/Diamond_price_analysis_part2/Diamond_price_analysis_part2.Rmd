@@ -1,0 +1,40 @@
+Diamond Price Analysis - Two variables
+
+```{r}
+getwd()
+```
+```{r}
+library(ggplot2)
+data("diamonds")
+names(diamonds)
+```
+
+### Create a scatterplot of price vs x 
+
+```{r}
+ggplot ( aes(x,price), data=diamonds)+geom_point()
+```
+### Observations
+As x increases the price seems to increase exponentially, with some outliers
+
+### Correlation between price and x
+
+```{r}
+
+cor.test(diamonds$x,diamonds$price)
+```
+
+###  Correlation between price and y
+
+```{r}
+cor.test(diamonds$y,diamonds$price)
+```
+
+###  Correlation between price and z
+
+```{r}
+cor.test(diamonds$z,diamonds$price)
+
+
+
+
