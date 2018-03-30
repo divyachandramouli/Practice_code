@@ -34,4 +34,38 @@ cor.test(diamonds$y,diamonds$price)
 ```{r}
 cor.test(diamonds$z,diamonds$price)
 ```
+### Create scatterplot of price vs depth
+
+```{r}
+ggplot ( aes(depth,price), data=diamonds)+geom_point()
+```
+
+# Change the code to make the transparency of the
+# points to be 1/100 of what they are now and mark
+# the x-axis every 2 units.
+
+```{r}
+ggplot ( aes(depth,price), data=diamonds)+geom_point(alpha = 1/100)+scale_x_continuous(breaks=seq(0,80,2))
+```
+
+### Observations
+From the plot we can see that most diamonds are between 59 and 64 values of depth
+
+### Correlation between price and depth
+```{r}
+cor.test(diamonds$depth, diamonds$price)
+```
+### Would you use depth to predict price of a diamond, based on the correlation coeff ?
+
+There is no significant variability in price with varying depth - Most diamonds fall in the 59-64 depth bucket, with a considerable range of price 
+
+# Create a scatterplot of price vs carat and omit the top 1% of price and carat values.
+
+```{r}
+ggplot ( aes(carat,price), data=diamonds)+geom_point()+xlim(0,quantile(diamonds$carat,0.99)) +
+  ylim(0,quantile(diamonds$price,0.99))
+
+```
+
+
 
