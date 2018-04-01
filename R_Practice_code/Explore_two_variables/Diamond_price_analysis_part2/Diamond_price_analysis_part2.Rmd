@@ -186,3 +186,13 @@ diamondsByCut
 
 ```
 
+
+### Plot bar graph for price by color, clarity and cut
+```{r}
+p1 <- ggplot(aes(clarity,mean_price), data=diamonds_mp_by_clarity)+geom_bar(stat='identity',fill='blue')
+p2<- ggplot (aes(color,mean_price), data=diamonds_mp_by_color)+geom_bar(stat='identity', fill='pink')
+p3<- ggplot (aes(cut,mean_price), data=diamondsByCut)+geom_bar(stat='identity', fill='green')
+
+grid.arrange(p1,p2,p3,ncol=1)
+```
+
