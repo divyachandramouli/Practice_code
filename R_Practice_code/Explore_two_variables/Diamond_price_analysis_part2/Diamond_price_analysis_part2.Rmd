@@ -175,3 +175,14 @@ Mean price tends to decrease as clarity improves. The same can be said for color
 
 
 We encourage you to look into the mean price across cut.
+
+### Mean price by cut
+
+```{r}
+diamondsByCut <- diamonds %>%
+  group_by(cut) %>%
+  summarise(mean_price = mean(price))
+diamondsByCut
+
+```
+
