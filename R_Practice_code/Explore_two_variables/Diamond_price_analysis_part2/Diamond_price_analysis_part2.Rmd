@@ -199,3 +199,5 @@ grid.arrange(p1,p2,p3,ncol=1)
 
 Premium cut has the highest price while ideal cut has the lowest price
 
+There seems to be some oddity in the data overall as price does not vary from lowest to highest for the worst to best categories for cut, color and clarity of diamonds
+
