@@ -195,4 +195,7 @@ p3<- ggplot (aes(cut,mean_price), data=diamondsByCut)+geom_bar(stat='identity', 
 
 grid.arrange(p1,p2,p3,ncol=1)
 ```
+## Reflections
+
+Premium cut has the highest price while ideal cut has the lowest price
 
