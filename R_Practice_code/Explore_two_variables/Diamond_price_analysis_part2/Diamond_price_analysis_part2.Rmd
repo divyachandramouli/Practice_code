@@ -165,7 +165,7 @@ library(gridExtra)
 
 ```{r}
 p1 <- ggplot(aes(clarity,mean_price), data=diamonds_mp_by_clarity)+geom_bar(stat='identity',fill='blue')
-p2<- ggplot (aes(color,mean_price), data=diamonds_mp_by_color)+geom_bar(stat='identity', fill='green')
+p2<- ggplot (aes(color,mean_price), data=diamonds_mp_by_color)+geom_bar(stat='identity', fill='pink')
 grid.arrange(p1,p2,ncol=1)
 ```
 We think something odd is going here. These trends seem to go against our intuition.
