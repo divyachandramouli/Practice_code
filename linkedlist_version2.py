@@ -58,8 +58,7 @@ class LinkedList(object):
 		current=self.head
 		cur_pos=1
 
-		
-		
+
 		if self.head:
 			while(current or cur_pos==pos):
 				if (cur_pos!=pos):
