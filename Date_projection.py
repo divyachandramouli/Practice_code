@@ -3,9 +3,7 @@
 Date Projection
 Complete the which_date() function below which returns the day that follows a specified time period after an initial date. Time periods can be specified in two different ways: as a number of days like "1 day" or "30 days", or as a number of weeks like "2 weeks" or "12 weeks".
 
-HINT: Python's datetime module will be very useful for solving this problem! documentation: https://docs.python.org/2/library/datetime.html
 
-NOTE: This quiz will be evaluated in Python 2.
 	'''
 from datetime import datetime as dt
 from datetime import timedelta 
