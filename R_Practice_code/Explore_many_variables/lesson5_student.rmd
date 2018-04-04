@@ -55,6 +55,27 @@ Almost throughout median friend count for women is larger than for men, with exc
 Users reporting to be 70 have the same friend count regardless of gender
 
 
+# Write code to create a new data frame,called 'pf.fc_by_age_gender', that contains
+# information on each age AND gender group.
+
+# The data frame should contain the following variables:
+
+#    mean_friend_count,
+#    median_friend_count,
+#    n (the number of users in each age and gender grouping)
+
+```{r}
+library(dplyr)
+sub_pf=subset(pf, !is.na(pf$gender))
+pf.fc_by_age_gender <- sub_pf %>%
+  group_by(age,gender) %>%
+ 
+  summarise(mean_friend_count = (mean(friend_count)), median_friend_count = round(median(as.numeric(friend_count))), n=n())%>%
+   ungroup() 
+
+pf.fc_by_age_gender 
+```
+
 
 ***
 
