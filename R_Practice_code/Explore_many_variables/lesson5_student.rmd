@@ -2,22 +2,56 @@ Lesson 5
 ========================================================
 
 ### Multivariate Data
-Notes:
+Two variables - scatterplot works
+Third variable - add another way to represent it
 
 ***
 
 ### Moira Perceived Audience Size Colored by Age
-Notes:
+Perceived audience size vs actual audience size
+3rd var : age
+Perceived audience size by age plot - add color to represent age
+- again getting horizontal stripes - no pattern in color - overplotting 
+Can't tell if older people guessed better than younger people
+Sometimes it's a dead end
 
 ***
 
 ### Third Qualitative Variable
-Notes:
+Examine relationship between friend count and age by adding a third variable
+
+Without adding age as a variable:
+
+```{r}
+library(ggplot2)
+ggplot(aes(friend_count),
+       data = subset(pf, !is.na(gender))) + geom_histogram()+facet_wrap(~gender)
+```
+
+Statistics for friedn_count by gender
+```{r}
+by(pf$friend_count,pf$gender,summary)
+```
+It appears that females have more friends on average than male users
+Is this because female users have a different age distribution??
+Maybe conditional on age, the differences are actually larger?
 
 ```{r Third Qualitative Variable}
+library(ggplot2)
+pf <- read.csv('pseudo_facebook.tsv',sep='\t')
 ggplot(aes(x = gender, y = age),
-       data = subset(pf, !is.na(gender))) + geom_histogram()
+       data = subset(pf, !is.na(gender))) + geom_boxplot()+
+  stat_summary(fun.y=mean, geom = 'point', shape =4)
 ```
+Averages are marked by an X
+Since male users are a bit younger, we might think that a simple male female comparison doesn't capture the differences in friend count
+
+
+```{r}
+
+```
+
+
 
 ***
 
