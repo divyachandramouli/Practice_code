@@ -119,7 +119,7 @@ spread(subset(pf.fc_by_age_gender,
        select = c('gender', 'age', 'median_friend_count')), 
        gender, median_friend_count)
 ```
-
+Using reshape2
 ```{r}
 install.packages('reshape2')
 library(reshape2)
@@ -135,7 +135,7 @@ head(pf.fc_by_age_gender.wide)
 We could also create a similar data frame using the dplyr and tidyr packages:
 
 ```{r}
-pf.fc_by_age_gender.wide <-
+pf.fc_by_age_gender.wide.alt <-
   subset(pf.fc_by_age_gender[c('age', 'gender', 'median_friend_count')],
          !is.na(gender)) %>%
   spread(gender, median_friend_count) %>%
@@ -148,11 +148,28 @@ head(pf.fc_by_age_gender.wide)
 ***
 
 ### Ratio Plot
-Notes:
 
+# Plot the ratio of the female to male median friend counts using the data frame
+# pf.fc_by_age_gender.wide.
+
+# Think about what geom you should use.Add a horizontal line to the plot with
+# a y intercept of 1, which will be the base line. Look up the documentation
+# for geom_hline to do that. Use the parameter linetype in geom_hline to make the
+# line dashed.
+
+# The linetype parameter can take the values 0-6:
+# 0 = blank, 1 = solid, 2 = dashed 3 = dotted, 4 = dotdash, 5 = longdash 6 = twodash
 ```{r Ratio Plot}
-
+ggplot(aes(x=age, y= female/male), data=pf.fc_by_age_gender.wide)+geom_line()+geom_hline(yintercept =1, alpha=0.3, linetype = 2)
 ```
+In young female users, median female user has about 2.5 times as many friends as the median male user,
+Clearly it was helpful to condition with age in understanding the relationship of friend count with gender
+The pattern is robust for users of many different ages - highlights where the difference is striking 
+
+One idea that shows the complexity of our interpretation is - people from particular countries who joined facebook recently are more likely to be male with lower friend counts
+
+
+
 
 ***
 
