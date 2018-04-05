@@ -81,20 +81,30 @@ pf.fc_by_age_gender
 
 ### Plotting Conditional Summaries
 Notes:
-
+Plot median friend count for each gender as age increases
 ```{r Plotting Conditional Summaries}
+ggplot(aes(x=age, y = median_friend_count),data = pf.fc_by_age_gender) + geom_line(aes(color=gender))
+
+
+
 
 ```
+### Thinking in Ratios
+Gender difference is largest for the young users
+How many times more friends does the average female user have more than the male user??
 
 ***
 
-### Thinking in Ratios
+
 Notes:
 
 ***
 
 ### Wide and Long Format
-Notes:
+the grouped data frame is in Long format 
+It has 2 rows male and female for each age
+Convert it to a wide format 
+age | male| female with male and female holding the median friend counts
 
 ***
 
@@ -102,10 +112,38 @@ Notes:
 Notes:
 
 ```{r}
-install.packages('reshape2')
-library(reshape2)
+install.packages("tidyr")
+library(tidyr)
+
+spread(subset(pf.fc_by_age_gender, 
+       select = c('gender', 'age', 'median_friend_count')), 
+       gender, median_friend_count)
 ```
 
+```{r}
+install.packages('reshape2')
+library(reshape2)
+
+pf.fc_by_age_gender.wide <- dcast(pf.fc_by_age_gender, age~ gender, value.var= 'median_friend_count')
+head(pf.fc_by_age_gender.wide)
+
+```
+ melt - allows conversion from wide to long format
+ 
+ It's important to use quotes around the variable name that is assigned tovalue.var. 
+
+We could also create a similar data frame using the dplyr and tidyr packages:
+
+```{r}
+pf.fc_by_age_gender.wide <-
+  subset(pf.fc_by_age_gender[c('age', 'gender', 'median_friend_count')],
+         !is.na(gender)) %>%
+  spread(gender, median_friend_count) %>%
+  mutate(ratio = male / female)
+
+head(pf.fc_by_age_gender.wide)
+
+```
 
 ***
 
