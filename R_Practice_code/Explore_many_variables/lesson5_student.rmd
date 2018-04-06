@@ -9,7 +9,7 @@ Third variable - add another way to represent it
 
 ### Moira Perceived Audience Size Colored by Age
 Perceived audience size vs actual audience size
-3rd var : age
+3rd var added: age
 Perceived audience size by age plot - add color to represent age
 - again getting horizontal stripes - no pattern in color - overplotting 
 Can't tell if older people guessed better than younger people
