@@ -30,10 +30,11 @@ ggplot(aes(friend_count),
   facet_wrap(~gender)
 ```
 
-Statistics for friedn_count by gender
+Statistics for friend_count by gender
 ```{r}
 by(pf$friend_count,pf$gender,summary)
 ```
+Comments:
 It appears that females have more friends on average than male users
 Is this because female users have a different age distribution??
 Maybe conditional on age, the differences are actually larger?
