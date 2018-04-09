@@ -25,7 +25,9 @@ Without adding age as a variable:
 ```{r}
 library(ggplot2)
 ggplot(aes(friend_count),
-       data = subset(pf, !is.na(gender))) + geom_histogram()+facet_wrap(~gender)
+       data = subset(pf, !is.na(gender))) +
+  geom_histogram()+
+  facet_wrap(~gender)
 ```
 
 Statistics for friedn_count by gender
