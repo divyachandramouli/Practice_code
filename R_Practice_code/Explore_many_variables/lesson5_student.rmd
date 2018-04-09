@@ -46,7 +46,7 @@ ggplot(aes(x = gender, y = age),
        data = subset(pf, !is.na(gender))) + geom_boxplot()+
   stat_summary(fun.y=mean, geom = 'point', shape =4)
 ```
-Averages are marked by an X
+Averages are marked by an X, because shape =4 
 Since male users are a bit younger, we might think that a simple male female comparison doesn't capture the differences in friend count
 
 Let's look at median friend count by age and gender instead:
