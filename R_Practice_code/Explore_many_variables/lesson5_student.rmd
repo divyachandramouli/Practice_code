@@ -2,7 +2,7 @@ Lesson 5
 ========================================================
 
 ### Multivariate Data
-Two variables - scatterplot works
+To analyze two variables - scatterplot works
 Third variable - add another way to represent it
 
 ***
