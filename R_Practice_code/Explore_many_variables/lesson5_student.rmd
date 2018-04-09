@@ -18,7 +18,7 @@ Sometimes it's a dead end
 ***
 
 ### Third Qualitative Variable
-Examine relationship between friend count and age by adding a third variable
+Examine the relationship between friend count and age by adding a third variable - age
 
 Without adding age as a variable:
 
