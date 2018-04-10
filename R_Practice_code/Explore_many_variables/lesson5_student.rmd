@@ -76,11 +76,9 @@ Arrange the dataframe by age
 library(dplyr)
 #sub_pf=subset(pf, !is.na(pf$gender)) - can use this dataframe instead of filtering
 
-
 pf.fc_by_age_gender <- pf %>%
   filter(!is.na(gender)) %>%
   group_by(age,gender) %>%
- 
   summarise(mean_friend_count = (mean(friend_count)), median_friend_count = round(median(as.numeric(friend_count))), n=n())%>%
    ungroup() %>%
   arrange(age)
