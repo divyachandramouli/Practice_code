@@ -55,7 +55,7 @@ Let's look at median friend count by age and gender instead:
 ggplot(aes(x=age, y = friend_count),data = subset(pf, !is.na(gender))) + geom_line(aes(color=gender),stat='summary',fun.y=median)
 ```
 
-Almost throughout median friend count for women is larger than for men, with exceptions - that include noisy estimates for very "old" users- we are not confident about these ages reported
+Almost throughout, the median friend count for women is larger than for men, with exceptions that include noisy estimates for very "old" users- we are not confident about these reported ages
 Users reporting to be 70 have the same friend count regardless of gender
 
 
