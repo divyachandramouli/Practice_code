@@ -194,7 +194,10 @@ One idea that shows the complexity of our interpretation is - people from partic
 ***
 
 ### Third Quantitative Variable
-Notes:
+We looked at ratio of female to male friend counts across the categorical variable, age
+Usually color or shape are the aesthetics to represent such changes over a categorical variable
+
+What if we looked at color or shape over a numeric variable?
 
 ```{r Third Quantitative Variable}
 
