@@ -231,8 +231,35 @@ floor(3.8)
 Notes:
 
 ```{r Cut a Variable}
+summary(pf$year_joined)
+```
+Value of the year joined are discrete and range is narrow, so let's table the values
+
+```{r}
+table(pf$year_joined)
+```
+This shows the distribution of users in each year joined
+Notice that there is not much data about early joiners - To increase the data in each group of the year joined / tenure category 
+
+'Cut' - useful to make discrete variables from continuous/ numerical ones, sometimes with quantile
+
+### Cut the variable year_joined to create 4 buckets of users
+# You need to create the following buckets for the
+# new variable, year_joined.bucket
+
+#        (2004, 2009]
+#        (2009, 2011]
+#        (2011, 2012]
+#        (2012, 2014]
+
+# Note that a parenthesis means exclude the year and a
+# bracket means include the year.
+
+
+```{r}
 
 ```
+
 
 ***
 
