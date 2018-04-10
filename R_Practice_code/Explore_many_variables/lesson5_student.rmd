@@ -197,7 +197,13 @@ One idea that shows the complexity of our interpretation is - people from partic
 We looked at ratio of female to male friend counts across the categorical variable, age
 Usually color or shape are the aesthetics to represent such changes over a categorical variable
 
-What if we looked at color or shape over a numeric variable?
+What if we looked at color or shape over another numerical variable?
+For example, friends are accumulated over time - so facebook tenure/days since registering on facebook is important 
+
+Explore friend count, gender, age and tenure - using a 2D display like a scatterplot and bin a quantitative variables and compare the bins
+In this case group users by the year that they joined
+
+### Create a variable called year_joined in the pf data frame using the variable tenure and 2014 as the reference year. The variable year joined should contain the year that a user joined facebook.
 
 ```{r Third Quantitative Variable}
 
