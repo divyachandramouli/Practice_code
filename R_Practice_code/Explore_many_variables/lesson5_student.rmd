@@ -206,7 +206,21 @@ In this case group users by the year that they joined
 ### Create a variable called year_joined in the pf data frame using the variable tenure and 2014 as the reference year. The variable year joined should contain the year that a user joined facebook.
 
 ```{r Third Quantitative Variable}
+names(pf)
+```
+2014 is the current year,  so 2014 - no. of years on facebook 
 
+if 2.2 years is the tenure, 3 should be subtracted from 2014 - ceiling() rounds up to the nearest integer 
+floor() rounds down to the the nearest integer
+
+```{r}
+pf$year_joined = 2014 - ceiling(pf$tenure/365)
+head(pf)
+
+```
+### Testing the floor function- even when decimal is greater than 5 it will round down
+```{r}
+floor(3.8)
 ```
 
 ***
