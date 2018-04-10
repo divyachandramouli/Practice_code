@@ -217,6 +217,8 @@ floor() rounds down to the the nearest integer
 pf$year_joined = 2014 - ceiling(pf$tenure/365)
 head(pf)
 
+# OR
+# pf$year_joined = floor(2014 - (pf$tenure/365))
 ```
 ### Testing the floor function- even when decimal is greater than 5 it will round down
 ```{r}
