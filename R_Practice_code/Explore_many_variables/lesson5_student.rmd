@@ -289,6 +289,10 @@ ggplot(aes(x = age, y = friend_count),
 # You should subset the data to exclude the users
 # whose year_joined.bucket is NA.
 
+```{r}
+ggplot(aes(x=age, y=friend_count), data=subset(pf,!is.na(pf$year_joined.bucket)))+geom_line(aes(color=year_joined.bucket),stat='summary', fun.y =median)
+```
+
 ***
 
 ### Plot the Grand Mean
