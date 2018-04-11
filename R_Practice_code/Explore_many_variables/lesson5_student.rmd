@@ -114,8 +114,10 @@ Notes:
 
 ### Wide and Long Format
 the grouped data frame is in Long format 
+- The variable grouped over - male and female has been repeated for each age
 It has 2 rows male and female for each age
 Convert it to a wide format 
+-Should have one row for each age, put the median friend count for male and female in the next two columns
 age | male| female with male and female holding the median friend counts
 
 ***
@@ -131,7 +133,12 @@ spread(subset(pf.fc_by_age_gender,
        select = c('gender', 'age', 'median_friend_count')), 
        gender, median_friend_count)
 ```
-Using reshape2
+Using reshape2 package
+We want  adataframe so we'll use dcast
+To get an array or a matrix use acast 
+
+dcast( <dataframe to be changed> , variables you want to keep with a plus sign - (here you want to keep only age) ~ variables whose categories you want as columns (gender) , value.var = <variable with key measurements of the values in the df>)
+
 ```{r}
 install.packages('reshape2')
 library(reshape2)
