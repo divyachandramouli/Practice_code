@@ -140,18 +140,18 @@ To get an array or a matrix use acast
 dcast( <dataframe to be changed> , variables you want to keep with a plus sign - (here you want to keep only age) ~ variables whose categories you want as columns (gender) , value.var = <variable with key measurements of the values in the df>)
 
 ```{r}
-install.packages('reshape2')
+#install.packages('reshape2')
 library(reshape2)
 
 pf.fc_by_age_gender.wide <- dcast(pf.fc_by_age_gender, age~ gender, value.var= 'median_friend_count')
 head(pf.fc_by_age_gender.wide)
 
 ```
- melt - allows conversion from wide to long format
+ melt - allows conversion from wide to back to the long format
  
  It's important to use quotes around the variable name that is assigned tovalue.var. 
 
-We could also create a similar data frame using the dplyr and tidyr packages:
+### We could also create a similar data frame using the dplyr and tidyr packages:
 
 ```{r}
 pf.fc_by_age_gender.wide.alt <-
@@ -168,8 +168,8 @@ head(pf.fc_by_age_gender.wide)
 
 ### Ratio Plot
 
-# Plot the ratio of the female to male median friend counts using the data frame
-# pf.fc_by_age_gender.wide.
+# Plot the ratio of the female to male median friend counts vs age
+# using the data frame pf.fc_by_age_gender.wide 
 
 # Think about what geom you should use.Add a horizontal line to the plot with
 # a y intercept of 1, which will be the base line. Look up the documentation
@@ -183,7 +183,8 @@ ggplot(aes(x=age, y= female/male), data=pf.fc_by_age_gender.wide)+geom_line()+ge
 ```
 In young female users, median female user has about 2.5 times as many friends as the median male user,
 Clearly it was helpful to condition with age in understanding the relationship of friend count with gender
-The pattern is robust for users of many different ages - highlights where the difference is striking 
+The pattern is robust for users of many different ages and highlights where the difference is striking 
+there are many processes that can produce this difference - including the biased distribution from which the pseudo facebook data was generated
 
 One idea that shows the complexity of our interpretation is - people from particular countries who joined facebook recently are more likely to be male with lower friend counts
 
