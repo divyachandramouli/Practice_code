@@ -46,6 +46,7 @@ ggplot(aes(x = gender, y = age),
 Averages are marked by an X
 Since male users are a bit younger, we might think that a simple male female comparison doesn't capture the differences in friend count
 
+Let's look at median friend count by age and gender instead:
 
 ```{r}
 ggplot(aes(x=age, y = friend_count),data = subset(pf, !is.na(gender))) + geom_line(aes(color=gender),stat='summary',fun.y=median)
