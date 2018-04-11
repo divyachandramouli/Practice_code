@@ -90,7 +90,8 @@ pf.fc_by_age_gender
 
 ### Plotting Conditional Summaries
 Notes:
-Plot median friend count for each gender as age increases
+### Construct the plot for the data from pf.fc_by_age_gender
+### Plot median friend count for each gender as age increases
 ```{r Plotting Conditional Summaries}
 ggplot(aes(x=age, y = median_friend_count),data = pf.fc_by_age_gender) + geom_line(aes(color=gender))
 
@@ -99,8 +100,10 @@ ggplot(aes(x=age, y = median_friend_count),data = pf.fc_by_age_gender) + geom_li
 
 ```
 ### Thinking in Ratios
+Understand more about about how the difference between male and female friend counts varies with age
+
 Gender difference is largest for the young users
-How many times more friends does the average female user have more than the male user??
+How many times more friends does the average female user have than the male user??
 
 ***
 
