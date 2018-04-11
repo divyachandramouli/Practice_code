@@ -52,7 +52,7 @@ Let's look at median friend count by age and gender instead:
 ggplot(aes(x=age, y = friend_count),data = subset(pf, !is.na(gender))) + geom_line(aes(color=gender),stat='summary',fun.y=median)
 ```
 
-Almost throughout median friend count for women is larger than for men, with exceptions - that include noisy estimates for very "old"" users- we are not confident about these ages reported
+Almost throughout median friend count for women is larger than for men, with exceptions - that include noisy estimates for very "old" users- we are not confident about these ages reported
 Users reporting to be 70 have the same friend count regardless of gender
 
 
@@ -65,14 +65,22 @@ Users reporting to be 70 have the same friend count regardless of gender
 #    median_friend_count,
 #    n (the number of users in each age and gender grouping)
 
+summarise will remove one layer of grouping when it runs ( the last group - gender)
+We need to ungroup one more time to remove the age layer
+Arrange the dataframe by age
+
 ```{r}
 library(dplyr)
-sub_pf=subset(pf, !is.na(pf$gender))
-pf.fc_by_age_gender <- sub_pf %>%
+#sub_pf=subset(pf, !is.na(pf$gender)) - can use this dataframe instead of filtering
+
+
+pf.fc_by_age_gender <- pf %>%
+  filter(!is.na(gender)) %>%
   group_by(age,gender) %>%
  
   summarise(mean_friend_count = (mean(friend_count)), median_friend_count = round(median(as.numeric(friend_count))), n=n())%>%
-   ungroup() 
+   ungroup() %>%
+  arrange(age)
 
 pf.fc_by_age_gender 
 ```
