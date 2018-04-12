@@ -325,12 +325,19 @@ Plotting the grand mean tells us that much of the data in the sample is from rec
 ***
 
 ### Friending Rate
-Notes:
+Since the general pattern continues to hold after conditioning on each of the buckets of year_joined, we might increase our confidence that this observation isn't just an artifact of the time users have had to accumulate friends
+
+Let's look at this relationship another way - we could look attenure and friend count as a rate instead
+How many friends does a user have for each day since they started using the service - create a summary for this
+Subset the data to only consider users with atleast one day of tenure
+
+Once you have the summary, find the median and maximum friend rate
 
 ```{r Friending Rate}
+with (subset(pf, tenure >= 1), summary (friend_count / tenure))
 
 ```
-
+The max is 417 - definitely  an outlier because third quartile is only about 0.5
 ***
 
 ### Friendships Initiated
