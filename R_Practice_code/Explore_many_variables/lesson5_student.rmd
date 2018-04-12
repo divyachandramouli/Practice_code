@@ -341,15 +341,18 @@ The max is 417 - definitely  an outlier because third quartile is only about 0.5
 ***
 
 ### Friendships Initiated
-Notes:
+Users who have been on facebook longer have higher friend counts across ages
+Wondering if friend requests are the same or different across groups
+Do new users go on a friendship initiating spree? Or do users with more tenure initiate more friendships?
 
-What is the median friend rate?
+### Create a line plot of frienships initiated vs tenure - use age, tenure, friendships_initiated and year_joined.bucket
+### The color of each part of your one line should correspond to each bucket of year joined. Subset to consider users with only one day of tenure
 
-What is the maximum friend rate?
 
 ```{r Friendships Initiated}
-
+ggplot(aes(x=tenure, y=friendships_initiated/tenure), data = subset(pf,tenure >=1)) + geom_line(aes(color= year_joined.bucket), stat='summary', fun.y = mean)
 ```
+Users with more tenure typically seem to initiate less friendships
 
 ***
 
