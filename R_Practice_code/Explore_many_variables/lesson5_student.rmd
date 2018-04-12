@@ -441,6 +441,39 @@ We still see that friendships initiated declines as tenure increases
 
 ### Sean's NFL Fan Sentiment Study
 
+Measuring fan sentiment for NFL teams 
+Counted ratios of positive to negative words at five minute increments over 4 months of NFL season - some measurements are very high over 100, though avg is 2-3 
+
+Computed moving average over 5 min increments - pooling over more measurements - makes them more reliable
+Stilltoo frequent and noisy to tell a story
+When aggregated upto a day of moving avg we start to see pattenrs emerge 
+Knew what he was looking for
+Wanted a model that predicts sentiment as a function of time - a natural spline
+
+Colored lines - wins and losses over time and sentiment is tracked over time 
+Gives an idea of why sentiment is upward or downward  
+Optimistic in the beginning - agfter 3 losses sentiment dips
+
+On the game day there is an abrupt change in sentiment - much sadder or happier at the end of a game - that is not displayed in the visual - expect to see discrete jumps - when that's not seen - you know it's a bad model
+We need something more flexible
+
+Use a 7 day moving avg - smooth it out over a week - tells a nice story  - big bumps on winning games, big dips when losses happen and periods of stability when you don't have info on how the team is doing 
+- Nice depiction that took a ittle bit of averaging to get the story out 
+
+Bias variance tradeoff??
+
+When you are computing just a simple moving avg you're dealing with a very flexible statistic - not imposing an structure - just letting the data speak 
+
+Plotted standard errors that were rolling  along with the data they were  gigantic - The mean sentiment for the season is somewhere in the three range
+
+The std errors were over 2 or 3 - we can precisely say what happens at any point but variance on that estimate is huge 
+As you start to add more lags, higher no of lags to the moving avg, we end up with smoother looking plots that have lower variance but are getting progressively more biased - because we are including more data that are actually not applicable to that exact point, in exchange we get a lower variance plot - one that doesn't move as wildly 
+
+When you combine that with splines you end up fitting a model that has kind of best of both worlds - smoothing aspect of splines with the discrete jumps of what happens on game day
+
+A spline where you add dummy variables for post game periods - smooth transition in between
+
+- A resultant model that better account for the fact that game days are an important thing
 
 ***
 
