@@ -21,9 +21,12 @@ Sometimes it's a dead end
 Examine the relationship between friend count and age by adding a third variable - age
 
 Without adding age as a variable:
-
 ```{r}
 library(ggplot2)
+```
+
+```{r}
+
 ggplot(aes(friend_count),
        data = subset(pf, !is.na(gender))) +
   geom_histogram()+
@@ -295,14 +298,29 @@ Users with longer tenure tend to have higher friend counts with the exception of
 To put  these cohort specific medians in perspective we can change them to cohort specific means and plot the grand mean on here
 
 
-***
-
 ### Plot the Grand Mean
+
+# Write code to do the following:
+
+# (1) Add another geom_line to code below
+# to plot the grand mean of the friend count vs age.
+
+# (2) Exclude any users whose year_joined.bucket is NA.
+
+# (3) Use a different line type for the grand mean.
+
+# As a reminder, the parameter linetype can take the values 0-6:
+
+# 0 = blank, 1 = solid, 2 = dashed
+# 3 = dotted, 4 = dotdash, 5 = longdash
+# 6 = twodash
 Notes:
 
 ```{r Plot the Grand Mean}
-
+ggplot(aes(x=age, y=friend_count), data=subset(pf,!is.na(pf$year_joined.bucket)))+geom_line(aes(color=year_joined.bucket),stat='summary', fun.y =mean) + geom_line(linetype= 2, stat='summary',fun.y=mean)
 ```
+Plotting the grand mean tells us that much of the data in the sample is from recent cohorts of joining - This is the type of more high level observation you want to  make as you explore data
+
 
 ***
 
