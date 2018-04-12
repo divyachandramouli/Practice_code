@@ -289,6 +289,11 @@ ggplot(aes(x = age, y = friend_count),
 ```{r}
 ggplot(aes(x=age, y=friend_count), data=subset(pf,!is.na(pf$year_joined.bucket)))+geom_line(aes(color=year_joined.bucket),stat='summary', fun.y =median)
 ```
+Comments:
+
+Users with longer tenure tend to have higher friend counts with the exception of old users (80 and above) - red line at the top 
+To put  these cohort specific medians in perspective we can change them to cohort specific means and plot the grand mean on here
+
 
 ***
 
