@@ -355,17 +355,14 @@ ggplot(aes(x=tenure, y=friendships_initiated/tenure), data = subset(pf,tenure >=
 Users with more tenure typically seem to initiate less friendships
 
 ***
+We are plotting y for every possible tenure value x - there is a lot of noise in the graph
+We can adjust the noise by binning the x axis differently 
 
 ### Bias-Variance Tradeoff Revisited
 Notes:
 
 ```{r Bias-Variance Tradeoff Revisited}
 
-ggplot(aes(x = tenure, y = friendships_initiated / tenure),
-       data = subset(pf, tenure >= 1)) +
-  geom_line(aes(color = year_joined.bucket),
-            stat = 'summary',
-            fun.y = mean)
 
 ggplot(aes(x = 7 * round(tenure / 7), y = friendships_initiated / tenure),
        data = subset(pf, tenure > 0)) +
@@ -386,11 +383,64 @@ ggplot(aes(x = 90 * round(tenure / 90), y = friendships_initiated / tenure),
             fun.y = mean)
 
 ```
+binning values by the denominator in the round function and then transforming back to the natural scale with the constant in front. 
+Same peaks from before, but this makes the graph much smoother in general 
+
+Using 30 instead of 7,
+
+```{r}
+ggplot(aes(x = 30 * round(tenure / 30), y = friendships_initiated / tenure),
+       data = subset(pf, tenure > 0)) +
+  geom_line(aes(color = year_joined.bucket),
+            stat = "summary",
+            fun.y = mean)
+```
+### Very high bias bit much lesser variance using 90,
+
+
+
+```{r}
+p1 = ggplot(aes(x=tenure, y=friendships_initiated/tenure), data = subset(pf,tenure >=1)) + geom_line(aes(color= year_joined.bucket), stat='summary', fun.y = mean)
+
+p2 = ggplot(aes(x = 7 * round(tenure / 7), y = friendships_initiated / tenure),
+       data = subset(pf, tenure > 0)) +
+  geom_line(aes(color = year_joined.bucket),
+            stat = "summary",
+            fun.y = mean)
+
+p3 = ggplot(aes(x = 30 * round(tenure / 30), y = friendships_initiated / tenure),
+       data = subset(pf, tenure > 0)) +
+  geom_line(aes(color = year_joined.bucket),
+            stat = "summary",
+            fun.y = mean)
+
+p4 = ggplot(aes(x = 90 * round(tenure / 90), y = friendships_initiated / tenure),
+       data = subset(pf, tenure > 0)) +
+  geom_line(aes(color = year_joined.bucket),
+            stat = "summary",
+            fun.y = mean)
+library(gridExtra)
+grid.arrange(p1,p2,p3,p4, ncol =1)
+```
+As bin size increases we see less noise on the plot
+Our estimates for the mean are adjusted since we have more datapoints for our new values of tenure
+
+We had earlier seen smoothers as a tool. Adda smoother to the above plot
+Remove stat and fun.y parameters - geom_smooth automatically chooses the appropriate statistical methods based on the data
+
+
+```{r}
+ggplot(aes(x = 7 * round(tenure / 7), y = friendships_initiated / tenure),
+       data = subset(pf, tenure > 0)) +
+  geom_smooth(aes(color = year_joined.bucket))
+```
+We still see that friendships initiated declines as tenure increases
+
 
 ***
 
 ### Sean's NFL Fan Sentiment Study
-Notes:
+
 
 ***
 
