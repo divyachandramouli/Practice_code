@@ -480,6 +480,10 @@ In the facebook data analysis, we have come to understand the behavior of facebo
 
 ### Introducing the Yogurt Data Set
 
+```{r}
+yo <- read.csv('yogurt.csv')
+names(yo)
+```
 
 ***
 
