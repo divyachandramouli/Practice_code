@@ -476,9 +476,10 @@ A spline where you add dummy variables for post game periods - smooth transition
 - A resultant model that better account for the fact that game days are an important thing
 
 ***
+In the facebook data analysis, we have come to understand the behavior of facebook users and how they use the facebook platform
 
 ### Introducing the Yogurt Data Set
-Notes:
+
 
 ***
 
