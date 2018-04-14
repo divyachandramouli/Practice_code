@@ -482,16 +482,35 @@ In the facebook data analysis, we have come to understand the behavior of facebo
 
 ```{r}
 yo <- read.csv('yogurt.csv')
-names(yo)
+str(yo)
+```
+
+```{r}
+# Change id from int  to factor
+yo$id <- factor(yo$id)
+str(yo)
 ```
 
 ***
 
 ### Histograms Revisited
 Notes:
+```{r}
+qplot(x=price, data=yo,  fill =I('#F79420'))
+```
+
 
 ```{r Histograms Revisited}
+qplot(x=price, data=yo, binwidth=1, fill =I('#F79420'))
+```
+There is n important discreteness to this distribution. There appear to be prices at which there are many observations, no observations in adjacent prices 
+This makes sense that prices are set in a way that applies to many of the consumers  - some purchases involve much lower prices 
+If we are interested in price sensitivity we definitely want to consider the sort of variation 
 
+###Choosing binwidth of 10, you'll miss the discreteness and empty spaces - for this data binwidth =10 is a very biased model
+
+```{r}
+qplot(x=price, data=yo, binwidth=10, fill =I('#F79420'))
 ```
 
 ***
@@ -500,7 +519,30 @@ Notes:
 Notes:
 
 ```{r Number of Purchases}
+summary(yo)
+```
+3rd quartile of price = max price - clue to discreetness 
 
+Can also see discreetness by how many distinct prices there are in the dataset
+
+```{r}
+length(unique(yo$price))
+```
+There are 20 different prices 
+```{r}
+table(yo$price)
+```
+
+###On a given purchase occasion, how many yogurts does a household purchase?
+
+###Combine sales for different flavors into one variable for each household
+
+### Create a variable all.purchases that gives the total counts of yogurt for each observation or household purchase 
+
+```{r}
+yo$all.purchases= NA
+yo=transform(yo, all.purchases= strawberry + blueberry + pina.colada + plain + mixed.berry)
+head(yo)
 ```
 
 ***
