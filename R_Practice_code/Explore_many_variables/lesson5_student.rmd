@@ -551,8 +551,28 @@ head(yo)
 Notes:
 
 ```{r Prices over Time}
-
+qplot(x=all.purchases, data = yo, binwidth =1, fill =I('#099DD9'))
 ```
+Most households buy one or two yogurts at a time 
+
+We have data on the same households over time
+
+
+# Create a scatterplot of price vs time.
+
+# This will be an example of a time series plot.
+
+# Resolve overplotting issues by using
+# techniques you learned in Lesson 4.
+
+# What are some things that you notice?
+
+Adding jitter to reduce overplotting
+```{r}
+ggplot(aes(x=time, y=price), data=yo)+geom_jitter(alpha=1/20, shape = 21, fill = I('#F79420'))
+```
+The modal or most common prices seem to increase over time
+We also see some lower price points scattered about the graph - These maybe due to sale, or perhaps buyers using coupons that bring down the price of yogurt
 
 ***
 
