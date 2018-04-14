@@ -592,23 +592,57 @@ Let's  pick 16 households at random and take a closer look
 
 ### Code up the above exploration 
 
+-Set the seed and sample 16 households
+-Sample from the levels because levels has the unique sample ids in the dataset
+
 ```{r}
+# Make the exploration reproducible
+set.seed(4230)
+sample.ids <- sample(levels(yo$id), 16) 
+```
+Plot each purchase occasion for each of the households that we sampled
 
+-Subset the dataframe to include only the sampled ids
+-Facet wrap id - we want 
+- A line plot
+- size parameter adds more detail to the dataset - no of yogurts purchased is the size of the point 
+
+%in% loops over all the ids in sample.ids
+Note: x %in% y returns a logical (boolean) vector the same length as x that says whether each entry in x appears in y. That is, for each entry in x, it checks to see whether it is in y. This allows us to subset the data so we get all the purchases occasions for the households in the sample. Then, we create scatterplots of price vs. time and facet by the sample id. 
+
+Use the pch or shape parameter to specify the symbol when plotting points. Scroll down to 'Plotting Points' on QuickR's Graphical Parameters.
+```{r}
+ggplot (aes(x=time, y=price), data = subset(yo, id %in% sample.ids))+
+  facet_wrap(~id)+
+  geom_line()+
+  geom_point(aes(size = all.purchases), pch =1)
 ```
 
+This creates a panel plot for each id of the household - we get panels for each of the households
+Horizontal line - not so much variation in how often each household buys yogurt 
+Larger circles - more quantity
+For most households the money spent on yogurt (price) tends to be steady or increases over time except few like 
+2nd row last plot - there is a dcrease in price
+2nd row 3rd plot - the household may be using coupons to drive the price down
 
-***
+Coupon info can be paired with this data for more info
 
-### Looking at Samples of Households
+Using another seed number, pick 16 households again and make the same plot
 
-```{r Looking at Sample of Households}
-
+```{r}
+set.seed(200)
+sample2.ids <- sample(levels(yo$id), 16) 
+ggplot (aes(x=time, y=price), data = subset(yo, id %in% sample2.ids))+
+  facet_wrap(~id)+
+  geom_line()+
+  geom_point(aes(size = all.purchases), pch =1)
 ```
+
 
 ***
 
 ### The Limits of Cross Sectional Data
-Notes:
+
 
 ***
 
