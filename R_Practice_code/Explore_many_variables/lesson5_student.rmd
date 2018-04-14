@@ -642,8 +642,20 @@ ggplot (aes(x=time, y=price), data = subset(yo, id %in% sample2.ids))+
 ***
 
 ### The Limits of Cross Sectional Data
+General idea is that if we have observations over time we can facet by the primary unit, case or individual in the dataset
+For the yogurt data it was the households we were faceting over
+This faceted time series plot is something we can't generate with pseudo facebook dataset since we don't have data on our sample of users over time - get back to that plot and see the limitation
 
+```{r}
+ggplot(aes(x = 7 * round(tenure / 7), y = friendships_initiated / tenure),
+       data = subset(pf, tenure > 0)) +
+  geom_smooth(aes(color = year_joined.bucket))
 
+```
+This data isn't great for examining the process of friending over time
+The dataset is just a crosssection - one snapshot at a fixed pt that tells the characteristics of individuals, not the individuals over, say a year
+But if we had a dataset like the yogurt one, we would be able to track friendships initiated over time and compare that with tenure
+This would give us better evidence to explain the difference or the drop in friendships initiated over time as tenure increases
 ***
 
 ### Many Variables
