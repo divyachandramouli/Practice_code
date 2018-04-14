@@ -675,7 +675,35 @@ This could be one way to let the dataset as a whole speak in part by drawing our
 ***
 
 ### Scatterplot Matrix
-Notes:
+Let the data speak to determine variables of interest
+A tool - create a no of scatterplots automatically - scatterplot matrix
+
+grid of scatterplot between every pair of vars  - they are great but not suited to all var types, eg categorical variables
+So there are other types of visualizations instead of scatter, like boxplot / histogram for categorical vars
+
+Need the GGally package
+
+```{r}
+#install.packages('GGally')
+```
+SCATTERPLOT MATRIX
+```{r}
+library(GGally)
+theme_set(theme_minimal(20))
+
+set.seed(1836)
+# We are going to sample from our dataset
+# We don't need  all vars - id, year_joined (derived from tenure), year_joined.bucket (categorical) so subset the dataframe and sample from that
+
+pf_subset <- pf[ , c(2:15)]
+names(pf_subset)
+```
+ 
+Use the GGpairs function inside of GGally to create the scatterplot matrix - this could even take an hour to run 
+
+```{r}
+ggpairs(pf_subset)
+```
 
 ***
 
