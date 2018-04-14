@@ -577,7 +577,25 @@ We also see some lower price points scattered about the graph - These maybe due 
 ***
 
 ### Sampling Observations
-Notes:
+How can we proceed differently with this type of  data set??
+
+A data set with multiple observations of the same units, often useful to work with a sample of the units so that it's easy to display the raw data for that sample
+
+Look at a small sample of households in more detail - we know what kind of within and between household variation we  are working with 
+The sub sample analysis might come before trying to use within household variation as part of a model
+For eg, to model consumr preferences at variety 
+How often household buy yogurt 
+How often they buy multiple items 
+What prices they are buying yogurt at 
+
+Let's  pick 16 households at random and take a closer look 
+
+### Code up the above exploration 
+
+```{r}
+
+```
+
 
 ***
 
