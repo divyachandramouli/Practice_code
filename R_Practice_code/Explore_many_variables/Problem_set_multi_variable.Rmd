@@ -105,8 +105,16 @@ ggplot(aes(x=volume, y=price), data =diamonds)+geom_point(aes(color=clarity))+
 # in the Pseudo-Facebook data set. The variable should contain
 # the proportion of friendships that the user initiated.
 
+```{r}
+names(pf)
+```
+
+
 
 ```{r}
+pf <- read.csv('pseudo_facebook.tsv', sep='\t')
+pf$prop_initiated = pf$friendships_initiated/pf$friend_count
+head(pf)
 
 ```
 
