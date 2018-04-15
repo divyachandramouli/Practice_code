@@ -731,7 +731,10 @@ But this scatterplot matrix is just a starting point for many analyses
 ***
 
 ### Even More Variables
-Notes:
+
+The scatterplot matrix will be extremely helpful when there are too many variables
+Eg, genomic data - 1000s of genetic measurements for each sample 
+ID genes associated with a disease
 
 ***
 
