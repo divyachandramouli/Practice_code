@@ -743,19 +743,36 @@ Notes:
 
 ```{r}
 nci <- read.table("nci.tsv")
+
+#changing column names to 1-64 to produce a nicer plot
 colnames(nci) <- c(1:64)
+head(nci)
 ```
 
+Display each combination of gene and sample case, the difference in gene expression and sample from the baseline
+Display combinations where a gene is over expressed in red, underexpressed in blue
+
+
+Melt the data into long format
 ```{r}
+library(reshape2)
 nci.long.samp <- melt(as.matrix(nci[1:200,]))
 names(nci.long.samp) <- c("gene", "case", "value")
 head(nci.long.samp)
 
+
+```
+
+```{r}
 ggplot(aes(y = gene, x = case, fill = value),
   data = nci.long.samp) +
   geom_tile() +
   scale_fill_gradientn(colours = colorRampPalette(c("blue", "red"))(100))
 ```
+Even in the dense display we are only showing 200 genes of 6000
+Genomic data is getting larger and complex 
+
+Fo eg, internet companies run randomizing experiments - A?B testing - difference in treatment outcome can be computed for many metrics of interest - many expts and many metrics - data looks similar to genomic data
 
 
 ***
