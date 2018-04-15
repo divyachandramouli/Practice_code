@@ -1,0 +1,9 @@
+
+LOAD DATASET
+
+```{r}
+library(ggplot2)
+data("diamonds")
+names(diamonds)
+```
+
