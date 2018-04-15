@@ -6,4 +6,35 @@ library(ggplot2)
 data("diamonds")
 names(diamonds)
 ```
+# Create a histogram of diamond prices. Facet the histogram by diamond color
+# and use cut to color the histogram bars. The plot should look something like this.
+# http://i.imgur.com/b5xyrOu.jpg
+
+# Note: In the link, a color palette of type 'qual' was used to color the histogram using
+# scale_fill_brewer(type = 'qual').
+# Note that the plot in the linked image is using log(price) for the x-axis to adjust for positive skew in the data.
+
+```{r}
+ggplot(aes(x=price), data=diamonds)+
+  facet_wrap(~color)+
+  geom_histogram(aes(fill = diamonds$cut))
+```
+
+Adjusting for the positive skew in the data using x=log(price), see how the plot changes
+
+```{r}
+ggplot(aes(x=log(price)), data=diamonds)+
+  facet_wrap(~color)+
+  geom_histogram(aes(fill = diamonds$cut))
+```
+Using the same colors as in the reference plot
+
+
+```{r}
+ggplot(aes(x=log(price)), data=diamonds)+
+  facet_wrap(~color)+
+  geom_histogram(aes(fill = diamonds$cut))+
+  scale_fill_brewer(type = 'qual')
+```
+
 
