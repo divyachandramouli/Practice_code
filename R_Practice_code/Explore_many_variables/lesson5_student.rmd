@@ -770,15 +770,22 @@ ggplot(aes(y = gene, x = case, fill = value),
   scale_fill_gradientn(colours = colorRampPalette(c("blue", "red"))(100))
 ```
 Even in the dense display we are only showing 200 genes of 6000
-Genomic data is getting larger and complex 
+Genomic data is getting larger and complex - microdata
 
-Fo eg, internet companies run randomizing experiments - A?B testing - difference in treatment outcome can be computed for many metrics of interest - many expts and many metrics - data looks similar to genomic data
+Many datasets are as large and getting larger - For eg, internet companies run randomizing experiments - A?B testing - difference in treatment outcome can be computed for many metrics of interest - many expts and many metrics - data looks similar to genomic data
 
 
 ***
 
 ### Analyzing Three of More Variables
 Reflection:
+Extend techniques to look at patterns across many variables at once
+
+Did simple extensions of scatterplots and plots of conditional summaries - adding summaries for multiple groups 
+Techniques to examine large number of variables at once - scatterplots and heat maps
+Reshape data - moving from raw data with one row per case to aggregate data with one row per combination of variables 
+We moved back and forth between  long and wide formats
+
 
 ***
 
