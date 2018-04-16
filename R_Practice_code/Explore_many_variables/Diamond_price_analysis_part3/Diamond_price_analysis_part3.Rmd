@@ -62,3 +62,31 @@ by(diamonds$table,diamonds$cut,summary)
 From the graph:
 Ideal : 53 - 57
 Premium : 58 - 62
+
+# Create a scatterplot of diamond price vs. volume (x * y * z) and color the points by
+# the clarity of diamonds. Use scale on the y-axis to take the log10 of price. You should also
+# omit the top 1% of diamond volumes from the plot.
+
+# Note: Volume is a very rough approximation of  a diamond's actual volume.
+
+# The plot should look something like this. http://i.imgur.com/excUpea.jpg
+
+# Note: In the link, a color palette of type 'div' was used to color the scatterplot using
+# scale_color_brewer(type = 'div')
+
+### Creating a volume column using transform
+
+```{r}
+diamonds$volume=NA
+diamonds=transform(diamonds, volume=x*y*z)
+names(diamonds)
+```
+
+### Scatterplot of price vs volume colored by clarity
+
+```{r}
+ggplot(aes(x=volume, y=price), data =diamonds)+geom_point(aes(color=clarity))+
+  scale_color_brewer(type = 'div')+scale_x_continuous(limits=c(0,500), breaks=seq(0,500,100))
+```
+
+
