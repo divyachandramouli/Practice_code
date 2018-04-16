@@ -51,3 +51,14 @@ ggplot(aes(x=table, y=price), data=diamonds)+
   scale_color_brewer(type = 'qual')
 ```
 
+# Typical table range for the majority of diamonds of 'ideal' cut and 'premium' cut - don't need to run summary for this 
+By statistics can be answered by the table below
+
+```{r}
+
+by(diamonds$table,diamonds$cut,summary)
+```
+# But the question is for majority of diamonds, the table range
+From the graph:
+Ideal : 53 - 57
+Premium : 58 - 62
