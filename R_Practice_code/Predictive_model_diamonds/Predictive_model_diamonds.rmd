@@ -78,7 +78,20 @@ Massive persuasion - diamonds became a status symbol and indispensable in engage
 ***
 
 ### ggpairs Function
-Notes:
+#### First thing you might consider doing is plotting key variables against each other using the ggpairs function 
+- You may want to sample first - otherwise the function may take a long time to render the plots
+- Also, if there are more than 10 columns there may be too many plotting windows, so subset on columns first if that's the case
+
+Packages
+
+GGally - for this plot
+scales - variety of  things
+Memisc - summarize the regression
+lattice - few other things
+MASS - various functions
+car - recode variables
+reshape - to reshape and wrangle data
+plyr- create interesting summaries and transmissions of your data
 
 ```{r ggpairs Function}
 # install these if necessary
@@ -91,12 +104,21 @@ install.packages('car')
 install.packages('reshape')
 install.packages('plyr')
 
+
+```
+
+```{r}
 # load the ggplot graphics package and the others
 library(ggplot2)
 library(GGally)
 library(scales)
 library(memisc)
 
+
+```
+
+
+```{r}
 # sample 10,000 diamonds from the data set
 set.seed(20022012)
 diamond_samp <- diamonds[sample(1:length(diamonds$price), 10000), ]
