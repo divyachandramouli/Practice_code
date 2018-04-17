@@ -855,10 +855,13 @@ ggplot(aes(x=tenure, y=prop_initiated), data=subset(nonnull_prop,!(is.na(year_jo
 
 
 ### For the group with the largest proportion of friendships initiated what is the group's average proportion of friendships initiated?
-
-
-
 ### Why do you think this group's proportion of friendships initiated is higher than the others?
+```{r}
+by(pf$prop_initiated,pf$year_joined.bucket,summary)
+```
+
+0.6654 is the mean for 2012 - 2014
+
 
 
 
