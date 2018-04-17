@@ -804,11 +804,66 @@ FROM PROBLEM SET
 # the proportion of friendships that the user initiated.
 
 ```{r}
-pf$prop_initiated = pf$friendships_initiated / pf$friend_count
+pf$prop_initiated=NA
+pf$prop_initiated=with(pf,ifelse(friend_count==0,NA,friendships_initiated/friend_count ))
+
 head(pf)
 ```
+# Create a line graph of the median proportion of
+# friendships initiated ('prop_initiated') vs.
+# tenure and color the line segment by
+# year_joined.bucket.
+
+# Recall, we created year_joined.bucket in Lesson 5
+# by first creating year_joined from the variable tenure.
+# Then, we used the cut function on year_joined to create
+# four bins or cohorts of users.
+
+# (2004, 2009]
+# (2009, 2011]
+# (2011, 2012]
+# (2012, 2014]
+
+# The plot should look something like this.
+# http://i.imgur.com/vNjPtDh.jpg
+# OR this
+# http://i.imgur.com/IBN1ufQ.jpg
+NOTE: You may need to filter out missing data from your dataframe before you are able to create your plot.
 
 ```{r}
-summary(pf$prop_initiated)
+
+nonnull_prop=subset(pf, !(is.na(prop_initiated)))
+ggplot(aes(x=tenure, y=prop_initiated), data=subset(nonnull_prop,!(is.na(year_joined.bucket))))+ geom_line(aes(color=year_joined.bucket), stat = "summary",fun.y = median)
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
