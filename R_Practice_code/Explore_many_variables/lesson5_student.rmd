@@ -837,9 +837,14 @@ ggplot(aes(x=tenure, y=prop_initiated), data=subset(nonnull_prop,!(is.na(year_jo
 ```
 
 
+# Smooth the last plot you created of
+# of prop_initiated vs tenure colored by
+# year_joined.bucket. You can bin together ranges
+# of tenure or add a smoother to the plot.
 
-
-
+```{r}
+ggplot(aes(x=tenure, y=prop_initiated), data=subset(nonnull_prop,!(is.na(year_joined.bucket))))+ geom_line(aes(color=year_joined.bucket), stat = "summary",fun.y = median)+geom_smooth()
+```
 
 
 
