@@ -9,11 +9,11 @@ Diamonds gave rise to the mining industry in South Africa - world's most advance
 
 ### Scatterplot Review
 
-#### Let's start by examining two variables in the data set. The scatterplot is a powerful tool to help you understand the relationship between two continuous variables.
+Let's start by examining two variables in the data set. The scatterplot is a powerful tool to help you understand the relationship between two continuous variables.
 
-#### We can quickly see if the relationship is linear or not. In this case, we can use a variety of diamond characteristics to help us figure out whether the price advertised for any given diamond is reasonable or a rip-off.
+ We can quickly see if the relationship is linear or not. In this case, we can use a variety of diamond characteristics to help us figure out whether the price advertised for any given diamond is reasonable or a rip-off.
 
-#### Let's consider the price of a diamond and it's carat weight.Create a scatterplot of price (y) vs carat weight (x).
+Let's consider the price of a diamond and it's carat weight. Create a scatterplot of price (y) vs carat weight (x).
 
 #### Limit the x-axis and y-axis to omit the top 1% of values.
 
@@ -35,7 +35,7 @@ ggplot(aes(x= carat, y= price), data = diamonds)+ geom_point(fill=I('#F79420'), 
 ```
 
 
-###Solution using qplot
+### Solution using qplot
 ```{r}
 qplot(data= diamonds, x=carat, y=price, xlim=c(0,quantile(diamonds$carat,0.99)), ylim=c(0,quantile(diamonds$price,0.99)))+geom_point(fill = I('#F79420'), color=I('black'), shape=21)
 ```
@@ -56,10 +56,9 @@ ggplot(aes(x=carat, y=price), data=diamonds)+scale_x_continuous(lim=c(0,quantile
 ```{r}
 ggplot(aes(x=carat, y=price), data=diamonds)+scale_x_continuous(lim=c(0,quantile(diamonds$carat,0.99)))+scale_y_continuous(lim=c(0,quantile(diamonds$price,0.99)))+geom_point(color='#F79420', alpha=1/4)+ stat_smooth(method='lm')
 ```
-The linear trendline does not go through the center of the data in some key places 
-- misses curving in the center of the plot and should slope up more towards the end
+The linear trendline does not go through the center of the data in some key places - misses curving in the center of the plot and should slope up more towards the end
 
-if we try to make predictions using this we might be off at some places inside and outside of the existing data that we have displayed 
+If we try to make predictions using this we might be off at some places inside and outside of the existing data that we have displayed 
 
 
 ***
