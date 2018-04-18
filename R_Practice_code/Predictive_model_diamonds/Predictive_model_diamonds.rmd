@@ -22,6 +22,8 @@ library(ggplot2)
 data("diamonds")
 names(diamonds)
 ```
+
+
 ### Range of price
 
 ```{r}
@@ -51,7 +53,7 @@ ggplot(aes(x=carat, y=price), data=diamonds)+scale_x_continuous(lim=c(0,quantile
 ### Price and Carat Relationship
 - Non linear relationship - exp or something else
 - Dispersion/varaiance of the relationship inc as carat inc
-- Can add a linear trim using the stat_smooth with method = 'lm'
+- Can add a linear trendline using the stat_smooth with method = 'lm'
 
 ```{r}
 ggplot(aes(x=carat, y=price), data=diamonds)+scale_x_continuous(lim=c(0,quantile(diamonds$carat,0.99)))+scale_y_continuous(lim=c(0,quantile(diamonds$price,0.99)))+geom_point(color='#F79420', alpha=1/4)+ stat_smooth(method='lm')
