@@ -93,7 +93,7 @@ lattice - few other things
 MASS - various functions
 car - recode variables
 reshape - to reshape and wrangle data
-plyr- create interesting summaries and transmissions of your data
+dplyr- create interesting summaries and transformations of your data
 
 ```{r ggpairs Function}
 # install these if necessary
@@ -104,7 +104,7 @@ install.packages('lattice')
 install.packages('MASS')
 install.packages('car')
 install.packages('reshape')
-install.packages('plyr')
+install.packages('dplyr')
 
 
 ```
@@ -115,7 +115,7 @@ library(ggplot2)
 library(GGally)
 library(scales)
 library(memisc)
-
+library(dplyr)
 
 ```
 
@@ -123,14 +123,25 @@ library(memisc)
 ```{r}
 # sample 10,000 diamonds from the data set
 set.seed(20022012)
+# sample 10000 row number in the range 1-length(data) , all columns
 diamond_samp <- diamonds[sample(1:length(diamonds$price), 10000), ]
 ggpairs(diamond_samp, 
         lower = list(continuous = wrap("points", shape = I('.'))), 
         upper = list(combo = wrap("box", outlier.shape = I('.'))))
 ```
 
-What are some things you notice in the ggpairs output?
-Response:
+### What are some things you notice in the ggpairs output?
+
+Lower triangle 
+- Grouped histograms for qualitative vs qualitative pairs using y as the grouping factor
+- Scatterplots for quantitative vs quantitative pairs
+
+Upper triangle
+- Grouped histograms for qualitative vs qualitative pairs - this time using x instead of y as the grouping factor
+- box plots for qualitative vs quantitative pairs 
+- Correlation for quantitative vs quantitative pairs
+
+### Look closely at the relationships that correspond to price - what do you notice?
 
 ***
 
