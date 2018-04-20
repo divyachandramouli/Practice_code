@@ -170,9 +170,30 @@ We might be especially interested in the cube root of carat weight
 Leveraging substantive knowledge about your data like this can lead to fruitful transformations
 
 ***
+### look at price vs carat plot
+
+```{r}
+ggplot(aes(x=carat, y=price), data=diamonds)+scale_x_continuous(lim=c(0,quantile(diamonds$carat,0.99)))+scale_y_continuous(lim=c(0,quantile(diamonds$price,0.99)))+geom_point(fill = I('#F79420'), color=I('black'), shape=21)
+```
 
 ### The Demand of Diamonds
-Notes:
+
+On the demand side , customers in the market for a less expensive smaller diamond are probably more sensitive to price than more well to do customers.
+Those buying less than 1 carat would almost surely never buy a diamond if not for the social norm of using a diamond while proposing
+Fewer customers can afford a bigger diamond - more than 1 carat - we shouldn't expect the market for bigger diamonds to be as competitive as the one for smaller diamonds 
+So it makes sense that the prce and variance increase with carat size
+
+Often the distribution of any monetary variable like dollars will be highly skewed and varyover orders of magnitude - this can be due to path dependence ( rich getting richer) or  multiplicative processes like year on year inflation or a combination of both - so a good idea to look into compressing any such variable by putting it on a log scale
+
+More tips on when to use log transformation
+
+https://www.r-statistics.com/2013/05/log-transformations-for-skewed-and-wide-distributions-from-practical-data-science-with-r/
+
+### Let's examine the distribution of price again  - generate two price histograms
+
+### Create two histograms of the price variable and place them side by side on one output image. We've put some code below to get you started. The first plot should be a histogram of price and the second plot should transform the price variable using log10. Set appropriate bin widths for each plot. ggtitle() will add a title to each histogram.
+
+
 
 ```{r The Demand of Diamonds}
 
