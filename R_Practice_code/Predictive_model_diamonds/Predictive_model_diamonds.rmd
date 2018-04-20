@@ -196,7 +196,15 @@ https://www.r-statistics.com/2013/05/log-transformations-for-skewed-and-wide-dis
 
 
 ```{r The Demand of Diamonds}
+library(gridExtra)
 
+plot1 <- qplot(x=price, data= diamonds, binwidth=100,fill=I('orange')) + 
+  ggtitle('Price')
+
+plot2 <- qplot(x=price, data=diamonds,binwidth=0.01,fill=I('blue')) + scale_x_log10()+
+  ggtitle('Price (log10)')
+
+grid.arrange(plot1,plot2)
 ```
 
 ***
