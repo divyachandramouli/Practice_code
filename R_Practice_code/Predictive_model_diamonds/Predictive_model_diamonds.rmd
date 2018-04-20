@@ -125,7 +125,7 @@ library(dplyr)
 set.seed(20022012)
 # sample 10000 row number in the range 1-length(data) , all columns
 diamond_samp <- diamonds[sample(1:length(diamonds$price), 10000), ]
-ggpairs(diamond_samp, 
+ggpairs(diamond_samp, axisLabels = 'internal',
         lower = list(continuous = wrap("points", shape = I('.'))), 
         upper = list(combo = wrap("box", outlier.shape = I('.'))))
 ```
@@ -141,7 +141,33 @@ Upper triangle
 - box plots for qualitative vs quantitative pairs 
 - Correlation for quantitative vs quantitative pairs
 
+The "params" argument to the ggpairs function are there to change the shape of the plotted points in the plot matrix, to make them easier to see. GGally 1.0 changes the syntax of these plotting parameters to no longer be part of a params argument, and instead can be specified as follows:
+
+ggpairs(diamond_samp,
+  lower = list(continuous = wrap("points", shape = I('.'))),
+  upper = list(combo = wrap("box", outlier.shape = I('.'))))
+You can click on the packages tab in RStudio to determine which packages have been installed.
+
+You may receive a message when installing the new packages. If so, click cancel, clear your workspace, and try installing the packages again.
+
+In this video, Solomon works with the plyr package. We worked with the dplyr package to manipulate data frames and to create new ones throughout the course. dplyr is the latest version of plyr that is specifically for working with data frames.
+
+Similarly, we worked with the reshape2 package, which is the newest version of the reshape package.
+
+When you duplicate the plot matrix on your local machine, you may want to add a axisLabels = 'internal' argument to your ggpairs function call to have the variable names on the diagonal of the matrix rather than on the outside.
+
 ### Look closely at the relationships that correspond to price - what do you notice?
+
+Critical factor driving price is the size/carat weight of the diamonds
+
+Relationship between price and carat is nonlinear. What might explain this pattern?
+
+On the supply side, maybe larger continuous chunks of diamonds without flaws are harder to find than smaller ones - might help explain exponential looking curve
+
+Weight = f (volume) = f(x*y*z)
+
+We might be especially interested in the cube root of carat weight
+Leveraging substantive knowledge about your data like this can lead to fruitful transformations
 
 ***
 
