@@ -210,8 +210,12 @@ grid.arrange(plot1,plot2)
 ***
 
 ### Connecting Demand and Price Distributions
-Notes:
+When looking at these plots what do you notice? Specifically about the wopeaks in the transformed plot and how it relates to teh demand for diamonds
 
+From the raw histogram , we see that diamond orices are heavily skewed. When we put the prices on a log10  scale, they seem more well behaved - closer to the bell curve of a normal distribution 
+We can even seea bit of evidence of bimodality in the log10 scale which is consistent with our two class rich buyer, poor buyer speculation about the nature of diamond customers
+
+We saw a sneak peek of this wehn we looked at log10 price by cut
 ***
 
 ### Scatterplot Transformation
