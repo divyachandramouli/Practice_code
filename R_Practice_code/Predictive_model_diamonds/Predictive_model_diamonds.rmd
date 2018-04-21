@@ -18,6 +18,7 @@ Let's consider the price of a diamond and it's carat weight. Create a scatterplo
 #### Limit the x-axis and y-axis to omit the top 1% of values.
 
 ```{r Scatterplot Review}
+install.packages("ggplot2")
 library(ggplot2)
 data("diamonds")
 names(diamonds)
@@ -105,7 +106,8 @@ install.packages('MASS')
 install.packages('car')
 install.packages('reshape')
 install.packages('dplyr')
-
+install.packages("ggplot2")
+install.packages('RColorBrewer')
 
 ```
 
@@ -196,8 +198,8 @@ https://www.r-statistics.com/2013/05/log-transformations-for-skewed-and-wide-dis
 
 
 ```{r The Demand of Diamonds}
-library(gridExtra)
 
+library(gridExtra)
 plot1 <- qplot(x=price, data= diamonds, binwidth=100,fill=I('orange')) + 
   ggtitle('Price')
 
@@ -238,7 +240,7 @@ inverse is to undo the operation - needed to display the plot correctly
 
 https://www.youtube.com/watch?v=Z1wB1rHAYzQ&list=PLOU2XLYxmsIK9qQfztXeybpHvru-TrqAP
 ```{r cuberoot transformation}
-cuberoot_trans = function() trans_new('cuberoot', transform = function(x) x^(1/3),
+cuberoot_trans = function() trans_new ('cuberoot', transform = function(x) x^(1/3),
                                       inverse = function(x) x^3)
 ```
 
@@ -258,38 +260,70 @@ We can now move forward and try modelling our data using just a linear model
 ***
 
 ### Overplotting Revisited
+Until now we haven't done anything about overplotting - when multiple points take on the same value - often due to rounding 
+Let's look at this by running the table command on carat and price, then sort that so that highest values appear first ( look at top 6)
+
+
 
 ```{r Sort and Head Tables}
-
+head(sort(table(diamonds$carat), decreasing = T ))
+head(sort(table(diamonds$price), decreasing = T))
 ```
+First line is the carat/price
+Second line is the count of each of these values
 
+We see that the counts are high - substantial overplotting - obscures the density and sparsity of our data - really key points 
+Deal with this by making your points smaller - jittering, adding transparency (in ggplot - alpha parameter)
 
 ```{r Overplotting Revisited}
-ggplot(aes(carat, price), data = diamonds) + 
-  geom_point() + 
+library(ggplot2)
+ggplot (aes(carat, price), data = diamonds) + 
+  geom_point(alpha=1/2, position='jitter', size=0.75) + 
   scale_x_continuous(trans = cuberoot_trans(), limits = c(0.2, 3),
                      breaks = c(0.2, 0.5, 1, 2, 3)) + 
   scale_y_continuous(trans = log10_trans(), limits = c(350, 15000),
                      breaks = c(350, 1000, 5000, 10000, 15000)) +
   ggtitle('Price (log10) by Cube-Root of Carat')
 ```
+A better sense of how dense / sparse our data is at key places is given by this plot after dealing with overplotting
 
 ***
 
 ### Other Qualitative Factors
-Notes:
+We can see an almost linear relationship between carat and price after doing some transformations
+But surely there are other factors that influence the price of diamonds - You can notice that clarity seems to factor into price
+Ofcourse many consumers are looking for a diamond of certain min size - so clarity is not as strong a factor as carat weight
+Most people need a jeweler to tell the difference in clarity - hard to tell by just looking
+According to blue nile the cut of a diamond has a much more consequential impact on the firy quality of diamonds. On clarity the website says many of these imperfections are microscopic and do not affect the diamond's beauty in any discernable way
+
+
 
 ***
 
 ### Price vs. Carat and Clarity
+Let's see if clarity, cut and color can explain some of the variance in price when we visualize it on our plot using color
 
 Alter the code below.
 ```{r Price vs. Carat and Clarity}
+# Adjust the code below to color the points by clarity.
+
+# A layer called scale_color_brewer() has 
+# been added to adjust the legend and
+# provide custom colors.
+
+# See if you can figure out what it does.
+# Links to resources are in the Instructor Notes.
+
+# You will need to install the package RColorBrewer
+# in R to get the same colors and color palettes.
 # install and load the RColorBrewer package
-install.packages('RColorBrewer')
+install.packages('RColorBrewer',dependencies = TRUE)
 library(RColorBrewer)
 
-ggplot(aes(x = carat, y = price), data = diamonds) + 
+library(ggplot2)
+# This code examines price by carat
+# We add the color parameter in the aesthetic wrapper
+ggplot(aes(x = carat, y = price,  color= clarity), data = diamonds) + 
   geom_point(alpha = 0.5, size = 1, position = 'jitter') +
   scale_color_brewer(type = 'div',
     guide = guide_legend(title = 'Clarity', reverse = T,
