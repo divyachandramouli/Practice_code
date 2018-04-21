@@ -220,19 +220,29 @@ We saw a sneak peek of this wehn we looked at log10 price by cut
 
 ### Scatterplot Transformation
 
-```{r Scatterplot Transformation}
+### Replot the data with price on log10 scale - price by cut histogram
 
+```{r Scatterplot Transformation}
+qplot(x=carat, y=price, data=diamonds)+scale_y_log10()+ggtitle('price(log10) by carat')
 ```
 
+On the log scale prices look less dispersed on the high  end of carat size and price
+We can actually do better 
+
+Let's try to use the cuberoot variable in light of our speculation about the flaws being exponentially more likely in diamonds of more volume
 
 ### Create a new function to transform the carat variable
+inverse is to undo the operation - needed to display the plot correctly
 
+### Writing your own function in R
+
+https://www.youtube.com/watch?v=Z1wB1rHAYzQ&list=PLOU2XLYxmsIK9qQfztXeybpHvru-TrqAP
 ```{r cuberoot transformation}
 cuberoot_trans = function() trans_new('cuberoot', transform = function(x) x^(1/3),
                                       inverse = function(x) x^3)
 ```
 
-#### Use the cuberoot_trans function
+#### Use the cuberoot_trans function for x axis - carat and log10 transformation for y axis - price
 ```{r Use cuberoot_trans}
 ggplot(aes(carat, price), data = diamonds) + 
   geom_point() + 
@@ -242,7 +252,9 @@ ggplot(aes(carat, price), data = diamonds) +
                      breaks = c(350, 1000, 5000, 10000, 15000)) +
   ggtitle('Price (log10) by Cube-Root of Carat')
 ```
+Things look almost linear now after the two transformation
 
+We can now move forward and try modelling our data using just a linear model
 ***
 
 ### Overplotting Revisited
