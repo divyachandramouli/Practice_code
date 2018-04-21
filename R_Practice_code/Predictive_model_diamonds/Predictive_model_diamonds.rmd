@@ -338,8 +338,9 @@ ggplot(aes(x = carat, y = price,  color= clarity), data = diamonds) +
 ***
 
 ### Clarity and Price
-Response:
-
+### Based on the plot do you think clarity explains some of the change in price? Why?
+Clarity does explain an awful lot of the remaining variance in price after adding color to the plot
+Holding the carat weight constant, we're looking at one part of the plot. We see the diamonds with lower clarity are almost always cheaper than diamonds with better clarity
 ***
 
 ### Price vs. Carat and Cut
