@@ -362,7 +362,10 @@ ggplot(aes(x = carat, y = price, color = cut), data = diamonds) +
 ***
 
 ### Cut and Price
-Response:
+### Based on the plot do you think cut accounts for some of the variance in price? Why?
+
+We don't see too much variation on cut the way we saw with clarity 
+Most of the diamonds in the data are ideal cut anyway. So we lost the color pattern that we saw before
 
 ***
 
