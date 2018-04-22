@@ -345,9 +345,9 @@ Holding the carat weight constant, we're looking at one part of the plot. We see
 
 ### Price vs. Carat and Cut
 
-Alter the code below.
+### Alter the code below to color the points by cut. Change the titles
 ```{r Price vs. Carat and Cut}
-ggplot(aes(x = carat, y = price, color = clarity), data = diamonds) + 
+ggplot(aes(x = carat, y = price, color = cut), data = diamonds) + 
   geom_point(alpha = 0.5, size = 1, position = 'jitter') +
   scale_color_brewer(type = 'div',
                      guide = guide_legend(title = 'Clarity', reverse = T,
@@ -356,7 +356,7 @@ ggplot(aes(x = carat, y = price, color = clarity), data = diamonds) +
                      breaks = c(0.2, 0.5, 1, 2, 3)) + 
   scale_y_continuous(trans = log10_trans(), limits = c(350, 15000),
                      breaks = c(350, 1000, 5000, 10000, 15000)) +
-  ggtitle('Price (log10) by Cube-Root of Carat and Clarity')
+  ggtitle('Price (log10) by Cube-Root of Carat and Cut')
 ```
 
 ***
