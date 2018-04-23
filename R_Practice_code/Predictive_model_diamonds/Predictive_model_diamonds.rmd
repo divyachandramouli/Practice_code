@@ -394,9 +394,18 @@ Color does seem to explain some of the variance in price like clarity does. Blue
 ***
 
 ### Linear Models in R
-Notes:
+In r we create models using the lm() function
 
-Response:
+FOrmula in the form of  lm(Y ~ X) where Y is the outcome variable and X is the explanatory variable
+Which of the formulas would we inside the lm() function?
+
+lm(log10(price) ~ carat^(1/3))
+
+Price is the outcome and carat is the predictor variable. We used our domain knowledge of diamonds and carat weight to take the cube root of carat weight (volume).
+
+We applied the log transformation to our long tailed dollar variable and we speculated that the flawless diamond should become exponentially rare as diamond volume increases - so we should be interested in the cube root of carat weight 
+
+
 
 ***
 
