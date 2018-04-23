@@ -424,7 +424,9 @@ m4 <- update(m3, ~ . + color)
 m5 <- update(m4, ~ . + clarity)
 mtable(m1, m2, m3, m4, m5)
 ```
-
+We see some nice R squared values.
+We are accounting for almost all the variance in price using the 4 Cs - Carat, Clarity, Color and Cut
+if we want to know whether the price for a diamond is reasonable we might now use this model
 
 Notice how adding cut to our model does not help explain much of the variance
 in the price of diamonds. This fits with out exploration earlier.
