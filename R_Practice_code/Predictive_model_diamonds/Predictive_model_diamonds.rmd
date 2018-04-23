@@ -396,7 +396,7 @@ Color does seem to explain some of the variance in price like clarity does. Blue
 ### Linear Models in R
 In r we create models using the lm() function
 
-FOrmula in the form of  lm(Y ~ X) where Y is the outcome variable and X is the explanatory variable
+Formula in the form of  lm(Y ~ X) where Y is the outcome variable and X is the explanatory variable
 Which of the formulas would we inside the lm() function?
 
 lm(log10(price) ~ carat^(1/3))
@@ -410,9 +410,13 @@ We applied the log transformation to our long tailed dollar variable and we spec
 ***
 
 ### Building the Linear Model
-Notes:
+The I wrapper is used around each of the variables -I stands for as is - tells R to use the expression inside the I function to transform a variable before using it in the regression - this is instead of instructing R to interpret these symbols as part of the formula to construct the design matrix for regression
+You can update the prev model to add the carat variable in the regression using m2. The real functional relationship is surely not as simple as the cube root of carat so we add a  simple linear function of carat in our model predicting price. We can continue to make more complex models by adding more variables. We add cut though we don't expect it to have much influence on the price
+next we add color to our fourth and clarity to fifth 
+
 
 ```{r Building the Linear Model}
+#If you are running this code on your local computer, you may need to modify the last line to state: mtable(m1, m2, m3, m4, m5, sdigits = 3). This will ensure that the output at the end of the table shows three significant digits like shown in the video.
 m1 <- lm(I(log(price)) ~ I(carat^(1/3)), data = diamonds)
 m2 <- update(m1, ~ . + carat)
 m3 <- update(m2, ~ . + cut)
@@ -420,6 +424,7 @@ m4 <- update(m3, ~ . + color)
 m5 <- update(m4, ~ . + clarity)
 mtable(m1, m2, m3, m4, m5)
 ```
+
 
 Notice how adding cut to our model does not help explain much of the variance
 in the price of diamonds. This fits with out exploration earlier.
