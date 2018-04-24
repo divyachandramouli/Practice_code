@@ -426,7 +426,7 @@ mtable(m1, m2, m3, m4, m5)
 ```
 We see some nice R squared values.
 We are accounting for almost all the variance in price using the 4 Cs - Carat, Clarity, Color and Cut
-if we want to know whether the price for a diamond is reasonable we might now use this model
+if we want to know whether the price for a diamond is reasonable we might now use this model. 
 
 Notice how adding cut to our model does not help explain much of the variance
 in the price of diamonds. This fits with out exploration earlier.
@@ -434,31 +434,44 @@ in the price of diamonds. This fits with out exploration earlier.
 ***
 
 ### Model Problems
-Video Notes:
+Can write the model equation as:
 
-Research:
-(Take some time to come up with 2-4 problems for the model)
-(You should 10-20 min on this)
+log(price) = 0.415 + 9.144 * (carat)^(1/3) -1.093*carat + (... * cut + ...* color + ...* clarity) + Epsilon(error term) 
 
-Response:
+### What could be some problems when using this model ? What else should we think about while using this model?
+- To start our data is from 2008. So not only do we need to account for inflation, but the diamond market is quite different now than it was. Infact when you fit models to this data and predict price for diamond that you find off a market you get predictions that were way too low. 
+
+- After some digging it was found that global diamonds were poor. It turns out that prices plummeted in 2008 due to the global financial crisis. SInce then prices atleast for wholesale polished diamonds have grown at atleast 6% per year compound annual rate 
+
+- Diamond market in China heating up - the rapidly growing #couples in China buying diamond engagement rings might also explain the increase. Visit below links to learn more
+
+After looking at data on price scope I realized diamond prices grew unevenly across different carat sizes since 2008 meaning that the initial model couldn't simply be adjusted by inflation
 
 ***
 
 ### A Bigger, Better Data Set
-Notes:
+A python script to put together the current diamond price data similar to the original diamonds dataset from diamondsc.info - about ten times the size of 2008 dataset - contains diamonds from all over the world certified by an array of authorities besides just the Gemological Institute of America or  the GIA
+
+You can read in this dataset (more than 500,000 cases) , but make sure you have installed Rcurl and bitops libraries 
 
 ```{r A Bigger, Better Data Set}
-install.package('bitops')
+install.packages('bitops')
 install.packages('RCurl')
 library('bitops')
 library('RCurl')
+# To directly load new dataset from web
+#diamondsurl = getBinaryURL("https://raw.github.com/solomonm/diamonds-data/master/BigDiamonds.Rda")
+#load(rawConnection(diamondsurl))
 
-diamondsurl = getBinaryURL("https://raw.github.com/solomonm/diamonds-data/master/BigDiamonds.Rda")
-load(rawConnection(diamondsurl))
+# if you manually download the file to your working directory , load the data
+load("BigDiamonds.rda")
 ```
-
+You can learn how to  scrape data from the web by taking Data Wrangling with MongoDB: Data Manipulation and Retrieval with us.
 The code used to obtain the data is available here:
 https://github.com/solomonm/diamonds-data
+
+Let's fit the model to this dataset. We will only use GIA certified diamonds. Only at diamonds less than $10000 - because these are sold at most retailers and we care most about 
+By trimming most expensive diamonds from dataset - model less likely to be thrown off by outliers and high variance at the high end of price in carat
 
 ## Building a Model Using the Big Diamonds Data Set
 Notes:
