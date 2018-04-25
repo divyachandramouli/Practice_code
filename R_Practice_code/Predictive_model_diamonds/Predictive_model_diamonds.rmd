@@ -526,24 +526,60 @@ Although our r squared values are a touch weaker
 ***
 
 ## Predictions
+### Use the model to make predictions
+We need to exponentiate the result of our model since we took the log of price
 
 Example Diamond from BlueNile:
 Round 1.00 Very Good I VS1 $5,601
 
+We'll use the full model m5 to predict the value of this diamond
+
 ```{r}
 #Be sure you’ve loaded the library memisc and have m5 saved as an object in your workspace.
+#data.frame creates data frames, tightly coupled collections of variables 
+# predict function - refer R documentation - takes the model, df with variables with which it should predict, interval and confidence level
+
 thisDiamond = data.frame(carat = 1.00, cut = "V.Good",
                          color = "I", clarity="VS1")
 modelEstimate = predict(m5, newdata = thisDiamond,
                         interval="prediction", level = .95)
+exp(modelEstimate)
 ```
 
-Evaluate how well the model predicts the BlueNile diamond's price. Think about the fitted point estimate as well as the 95% CI.
+### Evaluate how well the model predicts the BlueNile diamond's price. Think about the fitted point estimate as well as the 95% CI.
+
+
+The upper and lower bounds are for a 95% CI. Note, because this is a linear model predict is just multiplying each model coefficient by each value in our data.
+
+It turns out that this diamond is a touch pricier than the expected value under the full model, though it is by no means outside the 95% CI
+Blue Nile has a good reputation than diamondse.info from where this data set was taken
+Though this model can give you a sense of whether this diamond deal is a rip off, against diamondse.info, diamondse.info shouldn't be regarded as the universal source of truth about whether the price is reasonable
+
+Nonetheless, to have the expected price at diamondse.info with a 95% interval is a  lot more information on diamond prices compared to what we had when we started
+
+The prediction interval here may be slightly conservative, as the model errors are heteroskedastic over carat (and hence price) even after our log and cube-root transformations.
+
+See the output of the following code.
+
+```{r}
+dat = data.frame(m4$model, m4$residuals)
+
+with(dat, sd(m4.residuals))
+
+with(subset(dat, carat > .9 & carat < 1.1), sd(m4.residuals))
+
+dat$resid <- as.numeric(dat$m4.residuals)
+ggplot(aes(y = resid, x = round(carat, 2)), data = dat) +
+  geom_line(stat = "summary", fun.y = sd)
+```
+How could we do better? If we care most about diamonds with carat weights between 0.50 and 1.50, we might restrict the data we use to fit our model to diamonds that are that size - we have enough data.
 
 ***
 
 ## Final Thoughts
-Notes:
+Even though we predict price as f(4c's) one should not conclude that it is irrelevant where you buy the diamond
+You obviously pay more for the same diamond at Tiffany's compared to Costco
+A model like this gives you a sense of whether you are overpaying 
 
 ***
 
