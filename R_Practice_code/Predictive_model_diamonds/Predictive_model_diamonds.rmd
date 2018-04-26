@@ -578,8 +578,12 @@ How could we do better? If we care most about diamonds with carat weights betwee
 
 ## Final Thoughts
 Even though we predict price as f(4c's) one should not conclude that it is irrelevant where you buy the diamond
+
 You obviously pay more for the same diamond at Tiffany's compared to Costco
+
 A model like this gives you a sense of whether you are overpaying 
+
+Data and models are never infallible - you can still get taken even when equipped with this kind of analysis. No substitute for establishing a personal connection and lasting relationship with a jeweler you can trust.
 
 ***
 
