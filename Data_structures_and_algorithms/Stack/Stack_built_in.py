@@ -30,3 +30,5 @@ while True:
 		push(stack,element)
 	elif (choice==3):
 		print("Item popped out:",pop_out(stack))
+	else:
+		return
