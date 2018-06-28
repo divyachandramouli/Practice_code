@@ -1,17 +1,28 @@
 
-stack=[]
-def view_stack(stack):
-		for item in stack:
-			print(item)
-def push(stack, element):
-	stack.append(element)
+class stack_class():
 
-def pop_out(stack):
-	if(stack):
-		item=stack.pop()
-		return item
-	else:
-		print("Stack is empty")
+	def __init__(self):
+		self.a_stack=[]
+
+	def view_stack(self):
+		if(self.a_stack):
+			for item in self.a_stack:
+				print(item)
+		else:
+			print("Stack is empty!")
+			
+	def push(self, element):
+		self.a_stack.append(element)
+
+	def pop_out(self):
+		if(self.a_stack):
+			item=self.a_stack.pop()
+			return item
+		else:
+			print("Stack is empty")
+
+
+stack=stack_class()
 
 while True:
 	print("*********************************")
@@ -24,11 +35,11 @@ while True:
 	choice=int(input("Enter the choice number:"))
 
 	if (choice==1):
-		view_stack(stack)
+		stack.view_stack()
 	elif (choice==2):
 		element=input("Enter the element you want to push on to the stack:")
-		push(stack,element)
+		stack.push(element)
 	elif (choice==3):
-		print("Item popped out:",pop_out(stack))
+		print("Item popped out:",stack.pop_out())
 	else:
-		return
+		break
