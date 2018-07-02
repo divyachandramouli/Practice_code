@@ -24,7 +24,7 @@ class Queue(object):
 		if(self.head):
 			self.head=self.head.next
 			dequeued.next=None
-			self.size=self.size-1
+			
 		return dequeued
 			
 
@@ -36,3 +36,16 @@ e4=Element(4)
 e5=Element(5)
 q.enQ(e1)
 q.enQ(e2)
+q.enQ(e3)
+q2=Queue(e1)
+q2.enQ(e2)
+q2.enQ(e3)
+q2.enQ(e4)
+
+print("First element:",q2.head.value)#Prints first element
+print("Last element:",q2.tail.value)# Prints last element
+print("Dequeued:",q2.deQ().value)
+print("First element now:",q2.head.value)
+print("Last element:",q2.tail.value)
+q2.enQ(e5)
+print("Last element:",q2.tail.value)
