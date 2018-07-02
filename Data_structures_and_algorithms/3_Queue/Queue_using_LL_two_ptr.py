@@ -28,15 +28,13 @@ class Queue(object):
 		return dequeued
 			
 
-q=Queue()
+
 e1=Element(1)
 e2=Element(2)
 e3=Element(3)
 e4=Element(4)
 e5=Element(5)
-q.enQ(e1)
-q.enQ(e2)
-q.enQ(e3)
+q=Queue(e2)
 q2=Queue(e1)
 q2.enQ(e2)
 q2.enQ(e3)
@@ -49,3 +47,4 @@ print("First element now:",q2.head.value)
 print("Last element:",q2.tail.value)
 q2.enQ(e5)
 print("Last element:",q2.tail.value)
+print(q.tail.value)
