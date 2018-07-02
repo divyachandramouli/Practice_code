@@ -4,9 +4,9 @@ class Element(object):
 		self.next=None
 
 class Queue(object):
-	def __init__(self,head=None):
-		self.head=None
-		self.tail=None
+	def __init__(self,node=None):
+		self.head=node
+		self.tail=node
 	
 	def enQ(self,new_element):
 		if (self.tail):
@@ -28,3 +28,11 @@ class Queue(object):
 		return dequeued
 			
 
+q=Queue()
+e1=Element(1)
+e2=Element(2)
+e3=Element(3)
+e4=Element(4)
+e5=Element(5)
+q.enQ(e1)
+q.enQ(e2)
