@@ -24,10 +24,10 @@ class Queue(object):
 		if(self.head):
 			self.head=self.head.next
 			dequeued.next=None
-			
+		
 		return dequeued
 			
-
+"https://www.geeksforgeeks.org/queue-set-2-linked-list-implementation/"
 
 e1=Element(1)
 e2=Element(2)
