@@ -15,9 +15,15 @@ class Queue:
 	def isEmpty(self):
 		return self.size==0
 
+	def enQ(self):
+		"Changes rear and size"
+		"You have an array of size n and an index i into that array."
+		"Increment i so that it points to the next position in the array,"
+		"but have i return to the first position once the end of the"
+		" array is reached. - circular increment using % operator"
 	
 
-	
+
 			
 
 
