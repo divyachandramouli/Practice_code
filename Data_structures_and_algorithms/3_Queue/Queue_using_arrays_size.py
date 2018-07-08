@@ -12,5 +12,12 @@ class Queue:
 
 	def isFull(self)
 		return self.size==self.capacity
+	def isEmpty(self):
+		return self.size==0
 
-	def enQ(self)
+	
+
+	
+			
+
+
