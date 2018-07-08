@@ -22,7 +22,12 @@ class Queue:
 		"but have i return to the first position once the end of the"
 		" array is reached. - circular increment using % operator"
 	
-
+		if(! (self.isFull()):
+			self.rear= (self.rear+1)%self.capacity
+			self.Q[self.rear]=item
+			self.size=self.size+1
+		else:
+			print("Queue is full!")
 
 			
 
