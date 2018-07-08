@@ -10,3 +10,7 @@ class Queue:
 #Front and rear denote the indices 
 #Q is initialized to a list of size capacity with none as value
 
+	def isFull(self)
+		return self.size==self.capacity
+
+	def enQ(self)
