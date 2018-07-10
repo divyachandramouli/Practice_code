@@ -29,6 +29,11 @@ class Queue:
 		else:
 			print("Queue is full!")
 
-			
+	def deQ(self):
+		if (!self.isEmpty()):
+			dequeued=self.Q[self.front]
+			self.front=(self.front+1)%self.capacity
+			self.size=self.size-1
+			return dequeued
 
 
