@@ -35,5 +35,13 @@ class Queue:
 			self.front=(self.front+1)%self.capacity
 			self.size=self.size-1
 			return dequeued
+		else:
+			print("Queue is empty!")
+			return
 
 
+ # Function to get rear of queue
+    def que_rear(self):
+        if self.isEmpty():
+            print("Queue is empty")
+        print("Rear item is",  self.Q[self.rear])
