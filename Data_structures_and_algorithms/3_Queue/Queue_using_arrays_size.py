@@ -45,3 +45,11 @@ class Queue:
         if self.isEmpty():
             print("Queue is empty")
         print("Rear item is",  self.Q[self.rear])
+
+    #Function to get front of queue
+	def que_front(self):
+        if self.isEmpty():
+            print("Queue is empty")
+ 
+        print("Front item is", self.Q[self.front])
+         
