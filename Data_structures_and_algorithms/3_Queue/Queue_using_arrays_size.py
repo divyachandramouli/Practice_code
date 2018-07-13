@@ -53,3 +53,11 @@ class Queue:
  
         print("Front item is", self.Q[self.front])
          
+queue = Queue(30)
+queue.EnQueue(10)
+queue.EnQueue(20)
+queue.EnQueue(30)
+queue.EnQueue(40)
+queue.DeQueue()
+queue.que_front()
+queue.que_rear()
