@@ -42,15 +42,14 @@ class Queue:
 	 # Function to get rear of queue
 	def que_rear(self):
 		if self.isEmpty():
-	 		print("Queue is empty")
-	 		print("Rear item is",  self.Q[self.rear])
+			print("Queue is empty")
+		print("Rear item is ",self.Q[self.rear])
 
 #Function to get front of queue
 	def que_front(self):
 		if self.isEmpty():
 			print("Queue is empty")
-
-			print("Front item is", self.Q[self.front])
+		print("Front item is ",self.Q[self.front])
 
 queue = Queue(30)
 queue.EnQueue(10)
